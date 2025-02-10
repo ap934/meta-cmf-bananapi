@@ -1,5 +1,5 @@
 SRC_URI_append = " \
-    git://github.com/rdkcentral/bananapi-sysint.git;branch=develop;protocol=https;destsuffix=git/devicebpi;name=sysintdevicebpi \
+    ${CMF_GITHUB_ROOT}/bananapi-sysint.git;;branch=${CMF_GIT_DEVELOP_BRANCH};protocol=${CMF_GIT_PROTOCOL};destsuffix=git/devicebpi;name=sysintdevicebpi \
 "
 SRCREV_sysintdevicebpi = "${AUTOREV}"
 SRCREV_FORMAT = "sysintgeneric_sysintdevicebpi"
