@@ -35,5 +35,5 @@ DISTRO_FEATURES_append = " dac"
 
 DISTRO_FEATURES_append = " partner_default_ext"
 
-#NAND image is default image. Uncomment the following line for SDcard image
-#DISTRO_FEATURES_append = " sdmmc"
+#Enable SDcard image as default
+DISTRO_FEATURES_append = " sdmmc"
