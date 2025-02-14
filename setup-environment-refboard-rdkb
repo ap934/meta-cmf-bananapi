@@ -41,8 +41,10 @@ export RDK_BSP_LAYER=meta-cmf-bananapi
 
 
 # Enabling distro features as part of the build
-if [ "X$BPI_IMG_TYPE" != "X" ]; then
+if [ "X$BPI_IMG_TYPE" == "Xsdmmc" ]; then
     echo "DISTRO_FEATURES_append =\" $BPI_IMG_TYPE\"" >> conf/local.conf
+elif [ "X$BPI_IMG_TYPE" == "Xnand" ]; then
+    sed -i '/sdmmc/s/^/#/' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
 fi
 
 if [ ! -e ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia_changes_applied ]; then
