@@ -39,8 +39,41 @@ fi
 # default BSP layer is meta-cmf-bananapi for B-PI builds
 export RDK_BSP_LAYER=meta-cmf-bananapi
 
+if [ "X$BPI_IMG_TYPE" == "Xnand" ]; then
+    sed -i '/sdmmc/s/^/#/' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
+else # SD card image is default
+    mkdir -p ${_TOPDIR}/downloads
+    if [ -f ${_TOPDIR}/downloads/bpi-r4_sdmmc_bl2.img ] && [ -f ${_TOPDIR}/downloads/bpi-r4_sdmmc_fip.bin ]; then
+        echo "Both bl2 and fip binaries are present in local workspace."
+    else
+        echo "**********************************************************************"
+        echo "> CAUTION: YOU ARE TRYING TO BUILD SD CARD IMAGE WITHOUT BL2 AND FIP BINARIES."
+        echo "> Please download the binaries from https://artifactory.rdkcentral.com/artifactory/RDKB-Platform/BPI-R4/uboot-2024.04/bpi-r4_sdmmc_bl2.img and https://artifactory.rdkcentral.com/artifactory/RDKB-Platform/BPI-R4/uboot-2024.04/bpi-r4_sdmmc_fip.bin"
+        echo "> If you don't have access to above resources, please follow instruction in https://wiki.rdkcentral.com/pages/viewpage.action?pageId=354648448#SDMonoliticimagebuildandflashingstepsforBPIR4.-Buildingbl2.imgandfip.binincaseofnothavingaccesstoartifactoryrepository to build bl2 and fip binaries yourselves."
+        echo "> Place those binaries under ${_TOPDIR}/downloads/"
+        echo "> EXITING NOW."
+        echo "**********************************************************************"
+        return 1
+    fi
+fi
 
-# Enabling distro features as part of the build
-if [ "X$BPI_IMG_TYPE" != "X" ]; then
-    echo "DISTRO_FEATURES_append =\" $BPI_IMG_TYPE\"" >> conf/local.conf
+if [ ! -e ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia_changes_applied ]; then
+sed -i '19 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '39 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '40 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '8 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '42 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '43 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '21 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '170 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '171 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '172 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '179 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '180 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '199 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '200 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '201 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '202 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+sed -i '203 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia.bbappend
+touch ${_TOPDIR}/meta-cmf-filogic/recipes-ccsp/util/utopia_changes_applied
 fi

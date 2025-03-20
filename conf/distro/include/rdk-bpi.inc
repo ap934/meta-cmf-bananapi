@@ -13,7 +13,7 @@ DISTRO_FEATURES_append = " halVersion3"
 DISTRO_FEATURES_append = " HOSTAPD_2_10"
 
 # OneWifi feature
-#DISTRO_FEATURES_append = " OneWifi"
+DISTRO_FEATURES_append = " OneWifi"
 
 # MacFilter Feature
 DISTRO_FEATURES_append = " acl_nl_support"
@@ -34,3 +34,9 @@ DISTRO_FEATURES_append = " rdkb_cellular_manager_mm"
 DISTRO_FEATURES_append = " dac"
 
 DISTRO_FEATURES_append = " partner_default_ext"
+
+#Enable SDcard image as default
+DISTRO_FEATURES_append = " sdmmc"
+
+#PPP Feature
+#DISTRO_FEATURES_append = "ppp-enabled"
