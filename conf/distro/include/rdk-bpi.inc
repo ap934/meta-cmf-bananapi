@@ -40,3 +40,6 @@ DISTRO_FEATURES_append = " sdmmc"
 
 #PPP Feature
 #DISTRO_FEATURES_append = "ppp-enabled"
+
+#disabling lan0_as_wan to allow lan0 interface to come
+DISTRO_FEATURES_remove = " lan0_as_wan"

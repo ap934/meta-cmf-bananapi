@@ -5,6 +5,7 @@ SRCREV_rdk-wifi-hal = "51ce6f510012f1d3989bbe7141429498c9158d82"
 
 CFLAGS_append = " -D_PLATFORM_BANANAPI_R4_  -DBANANA_PI_PORT  -DFEATURE_SINGLE_PHY "
 CFLAGS_append_kirkstone = " -fcommon"
+CFLAGS_remove = "-DCONFIG_MBO"
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', ' ONE_WIFIBUILD=true ', '', d)}"
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', ' BANANA_PI_PORT=true ', '', d)}"
 
