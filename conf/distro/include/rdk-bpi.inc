@@ -10,7 +10,7 @@ CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '
 DISTRO_FEATURES_append = " halVersion3"
 
 #rdk-wifi-libhostap support for broadband
-DISTRO_FEATURES_append = " HOSTAPD_2_10"
+DISTRO_FEATURES_append = " HOSTAPD_2_11"
 
 # OneWifi feature
 DISTRO_FEATURES_append = " OneWifi"
