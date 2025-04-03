@@ -75,16 +75,6 @@ diff --git a/wifi_hal_generic.h b/wifi_hal_generic.h
 index 7edc2c4..db9ff83 100644
 --- a/wifi_hal_generic.h
 +++ b/wifi_hal_generic.h
-@@ -274,7 +274,8 @@ typedef enum {
-     wifi_security_mode_wpa3_personal = 0x00000200,
-     wifi_security_mode_wpa3_transition = 0x00000400,
-     wifi_security_mode_wpa3_enterprise = 0x00000800,
--    wifi_security_mode_enhanced_open = 0x00001000
-+    wifi_security_mode_enhanced_open = 0x00001000,
-+    wifi_security_mode_wpa3_compatibility = 0x00002000
- } wifi_security_modes_t;
- 
- /**
 @@ -822,6 +823,7 @@ typedef struct {
       BOOL radio_presence[MAX_NUM_RADIOS];         /**< Indicates if the interfaces is present (not in deep sleep)*/
       wifi_multi_link_info_t mu_info;
