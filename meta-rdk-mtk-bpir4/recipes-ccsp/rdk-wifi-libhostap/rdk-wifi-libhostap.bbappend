@@ -9,6 +9,11 @@ SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_10', 'file
 SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'file://2.11/Bpi_rdkwifilibhostap_2_11_changes.patch', 'file://2.10/Bpi_rdkwifilibhostap_2_10_changes.patch', d)}"
 SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'file://2.11/supplicant.patch', '', d)}"
 SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'file://2.11/libhostap.mk', '', d)}"
+SRC_URI_append = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', '\
+    file://2.11/0000-hostap-211-to-hostap-212-dev.patch;patchdir=source/hostap-2.11/ \
+    file://2.11/0001-mtk-hostapd-patch-all-in-one.patch;patchdir=source/hostap-2.11/ ',\
+    ' ', d)}"
 
 CFLAGS_append = " -D_PLATFORM_BANANAPI_R4_  -DCONFIG_SME -DCONFIG_GAS "
 CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'kernel6-6' , '-DCONFIG_AP','', d)}"
@@ -21,3 +26,5 @@ do_install_append() {
         install -d ${D}${includedir}/rdk-wifi-libhostap/wpa_supplicant/
         install -m 0755 ${S}/source/hostap-${HOSTAPD_PV}/wpa_supplicant/*.h ${D}${includedir}/rdk-wifi-libhostap/wpa_supplicant
 }
+
+
