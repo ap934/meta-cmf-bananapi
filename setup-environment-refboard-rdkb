@@ -108,6 +108,20 @@ if [ "X$KERNEL_TYPE" == "Xkernel6-6" ]; then
     sed -i '/kernel6-6/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
 fi
 
+if [ ! -e "${_TOPDIR}/meta-rdk-broadband/recipes-ccsp/rdk-wifi-libhostap/hostapd_applied" ]; then
+    for i in {55..88}; do
+        sed -i "${i} s/^/#/" "${_TOPDIR}/meta-rdk-broadband/recipes-ccsp/rdk-wifi-libhostap/rdk-wifi-libhostap.bb"
+    done
+
+sed -i '/^EXTRA_OEMAKE_append =/ i\
+SRC_URI += " \\\
+    file://.config \\\
+    file://libhostap.mk \\\
+"' "${_TOPDIR}/meta-rdk-broadband/recipes-ccsp/rdk-wifi-libhostap/rdk-wifi-libhostap.bb"
+
+    touch "${_TOPDIR}/meta-rdk-broadband/recipes-ccsp/rdk-wifi-libhostap/hostapd_applied"
+fi
+
 if [ "X$BPI_IMG_TYPE" == "Xnand" ]; then
     sed -i '/sdmmc/s/^/#/' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
 else # SD card image is default
