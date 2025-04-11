@@ -1,10 +1,10 @@
 DISTRO_FEATURES_append = " halVersion3"
 
 #rdk-wifi-libhostap support for broadband
-DISTRO_FEATURES_append = " HOSTAPD_2_10"
+DISTRO_FEATURES_append = " HOSTAPD_2_11"
 
 # OneWifi feature
-#DISTRO_FEATURES_append = " OneWifi"
+DISTRO_FEATURES_append = " OneWifi"
 
 # MacFilter Feature
 DISTRO_FEATURES_append = " acl_nl_support"
