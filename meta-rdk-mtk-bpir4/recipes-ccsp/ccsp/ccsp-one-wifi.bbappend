@@ -7,10 +7,14 @@ SRC_URI = "git://github.com/rdkcentral/OneWifi.git;protocol=https;branch=develop
 SRCREV_OneWifi = "7d4697bc74017e0ec57c3ba903a70dfe56809cb4"
 DEPENDS_append = " mesh-agent "
 DEPENDS_remove = " opensync "
+DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' rdk-wifi-libhostap ', '', d)}"
 
 CFLAGS_append = " -DWIFI_HAL_VERSION_3 -Wno-unused-function "
 LDFLAGS_append = " -ldl"
 CFLAGS_append_aarch64 = " -Wno-error "
+
+EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' --enable-em-app ', '', d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' -DEASY_MESH_NODE ', '', d)}"
 
 SRC_URI += " \
     file://checkwifi.sh \
