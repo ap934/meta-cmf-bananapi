@@ -13,14 +13,16 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI += " \
   file://InterfaceMap.json \
+  file://EasymeshCfg.json \
 "
 
 # Install InterfaceMap.json in /nvram
 do_install_append() {
   install -d ${D}/nvram
   install -m 0644 ${WORKDIR}/InterfaceMap.json ${D}/nvram/InterfaceMap.json
+  install -m 0644 ${WORKDIR}/EasymeshCfg.json  ${D}/nvram 
 }
 
 FILES_${PN} += " \
-  /nvram/InterfaceMap.json \
+  /nvram/* \
 "
