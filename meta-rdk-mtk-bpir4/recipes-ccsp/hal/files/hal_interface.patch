@@ -6,10 +6,20 @@
 #Signed-off-by:Amalesh_Nandh@comcast.com
 ################################################
 diff --git a/wifi_hal_ap.h b/wifi_hal_ap.h
-index f5c37db..4453112 100644
+index f5c37db..7daf939 100644
 --- a/wifi_hal_ap.h
 +++ b/wifi_hal_ap.h
-@@ -2736,6 +2736,14 @@ typedef struct {
+@@ -349,7 +349,8 @@ typedef enum
+     WIFI_RADIO_SCAN_MODE_FULL,
+     WIFI_RADIO_SCAN_MODE_ONCHAN,
+     WIFI_RADIO_SCAN_MODE_OFFCHAN,
+-    WIFI_RADIO_SCAN_MODE_SURVEY
++    WIFI_RADIO_SCAN_MODE_SURVEY,
++    WIFI_RADIO_SCAN_MODE_SELECT_CHANNELS
+ } wifi_neighborScanMode_t;
+ 
+ /**
+@@ -2736,6 +2737,14 @@ typedef struct {
  } __attribute__((packed)) wifi_back_haul_sta_t;
  
  #define WIFI_AP_MAX_SSID_LEN    33
@@ -24,7 +34,7 @@ index f5c37db..4453112 100644
  typedef struct {
      CHAR    ssid[WIFI_AP_MAX_SSID_LEN];
      BOOL    enabled;
-@@ -2763,6 +2771,8 @@ typedef struct {
+@@ -2763,6 +2772,8 @@ typedef struct {
      UINT   wmmNoAck;
      UINT   wepKeyLength;
      BOOL   bssHotspot;
@@ -33,7 +43,7 @@ index f5c37db..4453112 100644
      UINT   wpsPushButton;
      char   beaconRateCtl[32];
      BOOL   network_initiated_greylist;
-@@ -2919,4 +2929,4 @@ INT wifi_hal_analytics_callback_register(wifi_analytics_callback callback);
+@@ -2919,4 +2930,4 @@ INT wifi_hal_analytics_callback_register(wifi_analytics_callback callback);
  }
  #endif
  
@@ -52,3 +62,22 @@ index a55ede6..c8ca1a8 100644
  
      //Device Information related fields
       CHAR manufacturer[DEFAULT_DEVICE_FIELD_LEN];
+diff --git a/wifi_hal_telemetry.h b/wifi_hal_telemetry.h
+index 6867002..3596ea0 100644
+--- a/wifi_hal_telemetry.h
++++ b/wifi_hal_telemetry.h
+@@ -102,6 +102,7 @@ typedef struct _wifi_neighbor_ap2
+      CHAR  ap_SupportedDataTransferRates[256];  /**< Comma-separated list (maximum list length 256) of strings. Data transmit rates (in Mbps) for unicast frames at which the SSID will permit a station to connect. For example, ifSupportedDataTransferRatesis "1,2,5.5", this indicates that the SSID will only permit connections at 1 Mbps, 2 Mbps and 5.5 Mbps. */
+      UINT  ap_DTIMPeriod;   /**< The number of beacon intervals that elapse between transmission of Beacon frames containing a TIM element whose DTIM count field is 0. This value is transmitted in the DTIM Period field of beacon frames. [802.11-2012] */
+      UINT  ap_ChannelUtilization;   /**< Indicates the fraction of the time AP senses that the channel is in use by the neighboring AP for transmissions. */
++     UINT  ap_freq;    /**< Frequency. */
+ } wifi_neighbor_ap2_t;    //COSA_DML_NEIGHTBOURING_WIFI_RESULT
+ 
+ /*    Explanation:
+@@ -338,4 +339,4 @@ INT wifi_getVAPTelemetry(UINT apIndex, wifi_VAPTelemetry_t *telemetry);
+ }
+ #endif
+ 
+-#endif
+\ No newline at end of file
++#endif
