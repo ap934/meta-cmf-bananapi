@@ -43,8 +43,7 @@ SRC_URI_append = " \
     file://2.11/Dynamic_NAS_IP_Update_2_11.patch \
     file://2.11/patch_issues_with2_12.patch \
     file://2.11/wpa3_compatibility_hostap_2_11.patch \
-    file://2.11/wpa3_compatibility_telem_hostap_2_11.patch \
-    file://2.11/onewifi_crash_with_2_12.patch ',\
+    file://2.11/wpa3_compatibility_telem_hostap_2_11.patch ',\
     ' ', d)}"
 
 CFLAGS_append = " -D_PLATFORM_BANANAPI_R4_  -DCONFIG_SME -DCONFIG_GAS "
