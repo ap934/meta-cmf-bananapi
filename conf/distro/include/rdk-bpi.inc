@@ -10,13 +10,13 @@ CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '
 DISTRO_FEATURES_append = " halVersion3"
 
 #rdk-wifi-libhostap support for broadband
-DISTRO_FEATURES_append = " HOSTAPD_2_10"
+DISTRO_FEATURES_append = " HOSTAPD_2_11"
 
 # OneWifi feature
 DISTRO_FEATURES_append = " OneWifi"
 
 # MacFilter Feature
-DISTRO_FEATURES_append = " acl_nl_support"
+DISTRO_FEATURES_append = " disable_nl80211_acl"
 
 #No Moca Support
 DISTRO_FEATURES_append = " no_moca_support"
@@ -40,3 +40,10 @@ DISTRO_FEATURES_append = " sdmmc"
 
 #PPP Feature
 #DISTRO_FEATURES_append = "ppp-enabled"
+
+#disabling lan0_as_wan to allow lan0 interface to come
+DISTRO_FEATURES_remove = " lan0_as_wan"
+
+#Need to enable below distro once required changes are merged 
+#DISTRO_FEATURES_append = " EasyMesh"
+PREFERRED_VERSION_go = "1.19.%"
