@@ -34,6 +34,7 @@ SRC_URI += " \
     file://checkwifi.sh \
     ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', bb.utils.contains('DISTRO_FEATURES', 'em_extender', 'file://onewifi_pre_start_em_ext.sh ','file://onewifi_pre_start_em_ctrl.sh ', d), 'file://onewifi_pre_start.sh ', d)} \
     file://wifi_defaults.txt \
+    file://BE_variant_2GHZ.patch \
 "
 do_install_append(){
     install -d ${D}/nvram 
