@@ -3,6 +3,8 @@ IMAGE_INSTALL_append = " parodus parodus2ccsp"
 
 #TR069 Feature
 IMAGE_INSTALL_append = " ccsp-tr069-pa"
+IMAGE_INSTALL_append = " bpi-serialnumber"
+IMAGE_INSTALL_append = " bpi-macaddress"
 
 ROOTFS_POSTPROCESS_COMMAND_append = "add_busybox_fixes; "
 
@@ -21,3 +23,4 @@ add_busybox_fixes() {
 }
 
 IMAGE_INSTALL_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ppp-enabled', '', 'pptp-linux rp-pppoe xl2tpd', d)}"
+IMAGE_INSTALL_append = "${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh',' unified-wifi-mesh unified-wifi-mesh-cli','',d)}"
