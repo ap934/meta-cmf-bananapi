@@ -4,7 +4,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_remove = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/OneWifi;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=OneWifi"
 SRC_URI = "git://github.com/rdkcentral/OneWifi.git;protocol=https;branch=develop;name=OneWifi"
-SRCREV_OneWifi = "9b113eb7af912ee25c6a87086545e16b8a59fc8d"
+SRCREV_OneWifi = "e3b57bcb15b04a8c8b7d1ca7f08b79537cd844d3"
 DEPENDS_append = " mesh-agent "
 DEPENDS_remove = " opensync "
 DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' rdk-wifi-libhostap ', '', d)}"
