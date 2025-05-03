@@ -1,7 +1,7 @@
 SRC_URI_remove = "git://github.com/rdkcentral/rdk-wifi-hal.git;protocol=https;branch=main;name=rdk-wifi-hal"
 
 SRC_URI += "git://github.com/rdkcentral/rdk-wifi-hal.git;protocol=https;branch=develop;name=rdk-wifi-hal"
-SRCREV_rdk-wifi-hal = "a5d0c49e61b744fcc9ec86e48c73c155b4df8533"
+SRCREV_rdk-wifi-hal = "c24ac486aaed208c4deb4df1a040864c0712f487"
 
 CFLAGS_append = " -D_PLATFORM_BANANAPI_R4_  -DBANANA_PI_PORT  -DFEATURE_SINGLE_PHY "
 CFLAGS_append_kirkstone = " -fcommon"

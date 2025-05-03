@@ -86,6 +86,7 @@ fi
 
 if [ "X$FEATURE_TYPE" == "XEasyMesh" ]; then
     sed -i '/EasyMesh/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
+    sed -i '/sta_manager/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
 fi
 
 if [ "X$BPI_IMG_TYPE" == "Xnand" ]; then
