@@ -6,6 +6,8 @@ IMAGE_INSTALL_append = " ccsp-tr069-pa"
 IMAGE_INSTALL_append = " bpi-serialnumber"
 IMAGE_INSTALL_append = " bpi-macaddress"
 
+IMAGE_INSTALL_append = " rdk-speedtest-cli"
+
 ROOTFS_POSTPROCESS_COMMAND_append = "add_busybox_fixes; "
 
 #Emptying the PRSERV_HOST since builds are local
