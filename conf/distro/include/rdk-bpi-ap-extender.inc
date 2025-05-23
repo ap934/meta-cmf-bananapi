@@ -18,8 +18,11 @@ MACHINEOVERRIDES_append = "${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', ':
 DISTRO_FEATURES_append = " partner_default_ext"
 
 # Define extender feature
-DISTRO_FEATURES_append = " extender"
+DISTRO_FEATURES_append = " em_extender"
 DISTRO_FEATURES_append = " sdmmc"
+
+# Easymesh
+DISTRO_FEATURES_append = " EasyMesh"
 
 #PPP Feature
 #DISTRO_FEATURES_append = "ppp-enabled"
