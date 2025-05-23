@@ -6,7 +6,7 @@
 #Signed-off-by:Amalesh_Nandh@comcast.com
 ################################################
 diff --git a/wifi_hal_ap.h b/wifi_hal_ap.h
-index f5c37db..7daf939 100644
+index f5c37db..9f3f732 100644
 --- a/wifi_hal_ap.h
 +++ b/wifi_hal_ap.h
 @@ -349,7 +349,8 @@ typedef enum
@@ -19,7 +19,17 @@ index f5c37db..7daf939 100644
  } wifi_neighborScanMode_t;
  
  /**
-@@ -2736,6 +2737,14 @@ typedef struct {
+@@ -2711,7 +2712,9 @@ typedef struct {
+ typedef struct {
+     BOOL mld_enable;
+     UINT mld_id;
++    UINT mld_link_id;
+     mac_address_t mld_addr;
++    BOOL mld_apply;
+ } __attribute__((packed)) wifi_mld_common_info_t;
+ 
+ typedef struct {
+@@ -2736,6 +2739,14 @@ typedef struct {
  } __attribute__((packed)) wifi_back_haul_sta_t;
  
  #define WIFI_AP_MAX_SSID_LEN    33
@@ -30,20 +40,20 @@ index f5c37db..7daf939 100644
 + * Computed by taking Max MPDU size - ~ MAX 802.11 header size - 802.11 FCS size - ~Size of required IEs
 + * 2,310 is divisible by the typical Vendor IE size (7 = IE Type[1] + IE Length[1] + OUI[3] + VIE Type[1] + VIE Subtype [1])
 + */
-+#define WIFI_AP_MAX_VENDOR_IE_LEN 2310	
++#define WIFI_AP_MAX_VENDOR_IE_LEN 2310
  typedef struct {
      CHAR    ssid[WIFI_AP_MAX_SSID_LEN];
      BOOL    enabled;
-@@ -2763,6 +2772,8 @@ typedef struct {
+@@ -2762,6 +2773,8 @@ typedef struct {
+     mac_address_t bssid;                    /**< The BSSID. This variable should only be used in the get API. It can't used to change the interface MAC */
      UINT   wmmNoAck;
      UINT   wepKeyLength;
-     BOOL   bssHotspot;
 +    UINT   vendor_elements_len;
 +    UCHAR  vendor_elements[WIFI_AP_MAX_VENDOR_IE_LEN];
+     BOOL   bssHotspot;
      UINT   wpsPushButton;
      char   beaconRateCtl[32];
-     BOOL   network_initiated_greylist;
-@@ -2919,4 +2930,4 @@ INT wifi_hal_analytics_callback_register(wifi_analytics_callback callback);
+@@ -2919,4 +2932,4 @@ INT wifi_hal_analytics_callback_register(wifi_analytics_callback callback);
  }
  #endif
  
