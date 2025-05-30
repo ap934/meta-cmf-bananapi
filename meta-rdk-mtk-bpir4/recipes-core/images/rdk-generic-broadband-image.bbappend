@@ -6,6 +6,8 @@ IMAGE_INSTALL_append = " ccsp-tr069-pa"
 IMAGE_INSTALL_append = " bpi-serialnumber"
 IMAGE_INSTALL_append = " bpi-macaddress"
 
+
+IMAGE_INSTALL_append = " rdk-speedtest-cli"
 #Enable required linux utils for Fwupgrade
 IMAGE_INSTALL_append = " gptfdisk e2fsprogs-mke2fs"
 
