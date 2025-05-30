@@ -46,6 +46,8 @@ sed -i 's/^$CosaNAT::port_trigger_enabled=1/$CosaNAT::port_trigger_enabled=0/' $
 install -m 755 ${WORKDIR}/service_bridge_bpi.sh ${D}${sysconfdir}/utopia/service.d/
 install -m 755 ${WORKDIR}/service_bridge_bpi.sh ${D}${sysconfdir}/utopia/service.d/service_bridge.sh
 
+sed -i '/^#TOT_MSG_MAX=\$/s/^#//' ${D}${sysconfdir}/utopia/utopia_init.sh
+
 #Adding self heal defaults
 echo "#SelfHeal
 \$ConnTest_PingInterval=60
