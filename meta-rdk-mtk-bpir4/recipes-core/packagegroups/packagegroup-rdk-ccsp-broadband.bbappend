@@ -1,5 +1,8 @@
 RDEPENDS_packagegroup-rdk-ccsp-broadband_remove = " rdk-wifi-hal"
 
+RDEPENDS_packagegroup-rdk-ccsp-broadband_append = " rdk-speedtest-cli"
+RDEPENDS_packagegroup-rdk-ccsp-broadband_append = " iperf3"
+
 RDEPENDS_packagegroup-rdk-ccsp-broadband_append = " \
            ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', 'rdk-wifi-hal', '' ,d)} \
            ${@bb.utils.contains('DISTRO_FEATURES', 'CPUPROCANALYZER_BROADBAND', 'cpuprocanalyzer', ' ', d)} \
