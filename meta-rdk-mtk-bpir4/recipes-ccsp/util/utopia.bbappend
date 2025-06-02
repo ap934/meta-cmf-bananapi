@@ -84,6 +84,13 @@ echo "#SelfHeal
 #Custom Data Model
 $custom_data_model_enabled=0
 $custom_data_model_file_name=/usr/ccsp/tr069pa/custom_mapper.xml"  >> ${D}${sysconfdir}/utopia/system_defaults
+
+#Remote management
+sed -i 's/^\(\$mgmt_wan_httpsaccess=\)0/\11/' ${D}${sysconfdir}/utopia/system_defaults
+sed -i 's/^\(\$mgmt_wan_httpaccess=\)1/\10/' ${D}${sysconfdir}/utopia/system_defaults
+sed -i 's/^\(\$mgmt_wan_httpsport=\)443/\18181/' ${D}${sysconfdir}/utopia/system_defaults
+sed -i '/mgmt_wan_httpaccess/i \$mgmt_wan_httpaccess_ert=1' ${D}${sysconfdir}/utopia/system_defaults
+
 }
 
 FILES_${PN} += " \
