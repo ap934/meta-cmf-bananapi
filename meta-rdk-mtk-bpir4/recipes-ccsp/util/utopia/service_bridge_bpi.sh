@@ -579,9 +579,11 @@ add_to_group()
   wifi_wifi2=`iwconfig wifi2|grep IEEE\ 802.11 | wc -l`
   if [ $wifi_wifi0 == "1" ] ; then
         brctl delif "$bridge_name" wifi0
-  elif [ $wifi_wifi1 == "1" ]; then
+  fi
+  if [ $wifi_wifi1 == "1" ]; then
         brctl delif "$bridge_name" wifi1
-  elif [ $wifi_wifi2 == "1" ]; then
+  fi
+  if [ $wifi_wifi2 == "1" ]; then
         brctl delif "$bridge_name" wifi2
   fi
   
