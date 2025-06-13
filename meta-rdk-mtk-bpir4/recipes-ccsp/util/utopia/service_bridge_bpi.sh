@@ -440,6 +440,7 @@ virtual_interface()
         if [ "$LAN_IP" != "$dst_ip" ]; then
                 ifconfig "$CMDIAG_IF" $dst_ip netmask "$LAN_NETMASK" up
         fi
+        sysevent set ipv4_4-status down
     else
         ifconfig "$CMDIAG_IF" down
         ifconfig l"$CMDIAG_IF" down
@@ -579,9 +580,11 @@ add_to_group()
   wifi_wifi2=`iwconfig wifi2|grep IEEE\ 802.11 | wc -l`
   if [ $wifi_wifi0 == "1" ] ; then
         brctl delif "$bridge_name" wifi0
-  elif [ $wifi_wifi1 == "1" ]; then
+  fi
+  if [ $wifi_wifi1 == "1" ]; then
         brctl delif "$bridge_name" wifi1
-  elif [ $wifi_wifi2 == "1" ]; then
+  fi
+  if [ $wifi_wifi2 == "1" ]; then
         brctl delif "$bridge_name" wifi2
   fi
   
