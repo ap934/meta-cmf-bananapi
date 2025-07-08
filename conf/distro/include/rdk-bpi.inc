@@ -18,8 +18,6 @@ DISTRO_FEATURES_append = " OneWifi onewifi_integration"
 # MacFilter Feature
 DISTRO_FEATURES_append = " disable_nl80211_acl"
 
-DISTRO_FEATURES_append = " disable_nl80211_acl"
-
 #No Moca Support
 DISTRO_FEATURES_append = " no_moca_support"
 
@@ -62,3 +60,5 @@ DISTRO_FEATURES_append = " resource_optimization"
 #DISTRO_FEATURES_append = " kernel6-6"
 
 DISTRO_FEATURES_append = " CONFIG_IEEE80211BE"
+
+#DISTRO_FEATURES_append = " generic_mlo"

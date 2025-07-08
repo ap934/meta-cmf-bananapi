@@ -4,6 +4,9 @@ SRC_URI += "git://github.com/rdkcentral/rdk-wifi-hal.git;protocol=https;branch=d
 SRCREV_rdk-wifi-hal = "e312f47086551c5b3080ce2b8e7b89e4666d8de9"
 
 CFLAGS_append = " -D_PLATFORM_BANANAPI_R4_  -DBANANA_PI_PORT  -DFEATURE_SINGLE_PHY -DCONFIG_HW_CAPABILITIES "
+
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'generic_mlo', ' -DCONFIG_GENERIC_MLO ', '', d)}"
+
 CFLAGS_append_kirkstone = " -fcommon"
 CFLAGS_remove = "-DCONFIG_MBO"
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', ' ONE_WIFIBUILD=true ', '', d)}"

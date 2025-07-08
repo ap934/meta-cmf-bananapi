@@ -1,5 +1,10 @@
 ##########################################
-Source:  https://git01.mediatek.com
+Date: Apr 10, 2025 2:08 PM
+From:
+Subject: Applying MTK patches for Hostapd 2.12 on top of 2.11 for wifi 7 MLO
+Source: https://git01.mediatek.com
+Upstream-Status: Pending
+Signed-off-by: ssiras826 <ssiras826@cable.comcast.com>
 ##########################################
 diff --git a/afc/.gitignore b/afc/.gitignore
 new file mode 100644

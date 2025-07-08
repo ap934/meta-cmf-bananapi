@@ -1,3 +1,11 @@
+##########################################
+Date: Apr 18, 2025 5:05 PM
+From:
+Subject: Fixing build issues for rdk-wifi-hal after the tip updation for wifi components
+Source: Comcast
+Upstream-Status: Pending
+Signed-off-by: ssiras826 <ssiras826@cable.comcast.com>
+##########################################
 diff --git a/wifi_hal_ap.h b/wifi_hal_ap.h
 index f5c37db..d63f1b8 100644
 --- a/wifi_hal_ap.h
