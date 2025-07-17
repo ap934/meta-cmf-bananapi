@@ -25,11 +25,11 @@ CFLAGS_append = " \
 
 
 do_compile() {
-        ${CC} ${S}/source/rdk-speedtest-cli.c ${CFLAGS} ${LDFLAGS} -I ${S}/include -o speedtest-client
+        ${CC} ${S}/source/rdk-speedtest-cli.c ${CFLAGS} ${LDFLAGS} -I ${S}/include -o RefSpeedtestClient
 }
 
 
 do_install() {
         install -d ${D}${bindir}
-        install -m 0755 speedtest-client ${D}${bindir}/speedtest-client
+        install -m 0755 RefSpeedtestClient ${D}${bindir}/RefSpeedtestClient
 }
