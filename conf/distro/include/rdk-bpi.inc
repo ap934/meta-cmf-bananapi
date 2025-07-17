@@ -51,3 +51,5 @@ PREFERRED_VERSION_go = "1.19.%"
 
 #Enable wps support
 DISTRO_FEATURES_append = " wps_support"
+
+DISTRO_FEATURES_append_broadband = " rdkb_xdsl_ppp_manager"
