@@ -51,3 +51,6 @@ PREFERRED_VERSION_go = "1.19.%"
 
 #Enable wps support
 DISTRO_FEATURES_append = " wps_support"
+
+#Enable resource optimization
+DISTRO_FEATURES_append = " resource_optimization"
