@@ -48,3 +48,6 @@ DISTRO_FEATURES_remove = " lan0_as_wan"
 #DISTRO_FEATURES_append = " EasyMesh"
 #DISTRO_FEATURES_append = " sta_manager"
 PREFERRED_VERSION_go = "1.19.%"
+
+#Enable wps support
+DISTRO_FEATURES_append = " wps_support"

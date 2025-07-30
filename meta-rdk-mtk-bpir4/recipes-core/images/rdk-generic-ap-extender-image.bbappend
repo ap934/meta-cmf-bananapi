@@ -1,4 +1,25 @@
 inherit rdk-image
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+
+#SDCARD supported Pre build bootloader
+do_build[depends] += "${@bb.utils.contains('DISTRO_FEATURES','sdmmc','atf_bootloader_prebuild:do_deploy','',d)}"
+ROOTFS_POSTPROCESS_COMMAND_append = "add_busybox_fixes; "
+
+#Emptying the PRSERV_HOST since builds are local
+PRSERV_HOST = ""
+
+add_busybox_fixes() {
+                if [  -d ${IMAGE_ROOTFS}/bin ]; then
+                        cd ${IMAGE_ROOTFS}/bin/
+                        rm ps
+                        rm ../usr/bin/awk
+                        ln -sf  /bin/busybox.nosuid  ps
+                        ln -sf  /bin/busybox.nosuid  ${IMAGE_ROOTFS}/usr/bin/awk
+                        cd -
+                fi
+}
+IMAGE_INSTALL_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ppp-enabled', '', 'pptp-linux rp-pppoe xl2tpd', d)}"
 
 IMAGE_FEATURES_remove = "read-only-rootfs"
 IMAGE_FSTYPES_remove= "tar.gz"
@@ -40,6 +61,7 @@ IMAGE_INSTALL += " \
     tcpdump \
     perf \
     ${@bb.utils.contains('DISTRO_FEATURES','mt76','packagegroup-filogic-mt76','',d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES','em_extender','packagegroup-ap-extender','',d)} \
     ${@bb.utils.contains('DISTRO_FEATURES','logan','packagegroup-filogic-logan','',d)} \
     ${@bb.utils.contains('DISTRO_FEATURES','mtk_easymesh','packagegroup-filogic-mtk-easymesh','',d)} \
     ${@bb.utils.contains('DISTRO_FEATURES','emmc','e2fsprogs f2fs-tools','',d)} \
@@ -51,11 +73,6 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES','samba','ksmbd ksmbd-tools','',d)} \
     "
 #IMAGE_INSTALL += " opensync openvswitch mesh-agent e2fsprogs "
-
-IMAGE_INSTALL_append = " \
-    packagegroup-rdk-oss-broadband \
-    packagegroup-ap-extender \
-    "
 
 IMAGE_INSTALL_append_mt7988 += " marvell-eth-firmware mediatek-eth-firmware "
 

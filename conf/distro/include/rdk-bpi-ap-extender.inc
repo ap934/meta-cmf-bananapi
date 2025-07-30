@@ -23,6 +23,7 @@ DISTRO_FEATURES_append = " sdmmc"
 
 # Easymesh
 DISTRO_FEATURES_append = " EasyMesh"
+DISTRO_FEATURES_append = " sta_manager"
 
 #PPP Feature
 #DISTRO_FEATURES_append = "ppp-enabled"

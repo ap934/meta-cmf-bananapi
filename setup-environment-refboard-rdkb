@@ -84,6 +84,12 @@ sed -i '19 s/^/#/' ${_TOPDIR}/meta-cmf-filogic/recipes-core/dbus/dbus_%.bbappend
 touch ${_TOPDIR}/meta-cmf-filogic/recipes-core/dbus/dbus_change
 fi
 
+if [ ! -e ${_TOPDIR}/meta-cmf-filogic/recipes-core/images/python_binary_removed ];then
+sed -i '/python/d' ${_TOPDIR}/meta-cmf-filogic/recipes-core/images/image-exclude-files.inc
+touch ${_TOPDIR}/meta-cmf-filogic/recipes-core/images/python_binary_removed
+fi
+
+
 if [ "X$FEATURE_TYPE" == "XEasyMesh" ]; then
     sed -i '/EasyMesh/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
     sed -i '/sta_manager/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
