@@ -4,7 +4,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_remove = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/OneWifi;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=OneWifi"
 SRC_URI = "git://github.com/rdkcentral/OneWifi.git;protocol=https;branch=develop;name=OneWifi"
-SRCREV_OneWifi = "850296b0a26daa25e5849176baaf289b6017b519"
+SRCREV_OneWifi = "5924baad3842f75f50569e73c42b80e11c0454dc"
 DEPENDS_append = " mesh-agent "
 DEPENDS_remove = " opensync "
 DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' rdk-wifi-libhostap ', '', d)}"
@@ -32,13 +32,13 @@ EXTRA_OECONF_append = " ONEWIFI_BLASTER_APP_SUPPORT=true"
 
 SRC_URI += " \
     file://checkwifi.sh \
-    file://onewifi_pre_start.sh \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', bb.utils.contains('DISTRO_FEATURES', 'em_extender', 'file://onewifi_pre_start_em_ext.sh ','file://onewifi_pre_start_em_ctrl.sh ', d), 'file://onewifi_pre_start.sh ', d)} \
     file://wifi_defaults.txt \
 "
 do_install_append(){
     install -d ${D}/nvram 
     install -m 777 ${WORKDIR}/checkwifi.sh ${D}/usr/ccsp/wifi/
-    install -m 777 ${WORKDIR}/onewifi_pre_start.sh ${D}/usr/ccsp/wifi/
+    install -m 777 ${WORKDIR}/onewifi_pre_*.sh ${D}/usr/ccsp/wifi/onewifi_pre_start.sh
     install -m 644 ${WORKDIR}/wifi_defaults.txt ${D}/nvram/
 }
 
