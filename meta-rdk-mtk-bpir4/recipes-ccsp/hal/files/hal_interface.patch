@@ -6,7 +6,7 @@
 #Signed-off-by:Amalesh_Nandh@comcast.com
 ################################################
 diff --git a/wifi_hal_ap.h b/wifi_hal_ap.h
-index 00134cc..34934c9 100644
+index 00134cc..dca93e7 100644
 --- a/wifi_hal_ap.h
 +++ b/wifi_hal_ap.h
 @@ -349,7 +349,8 @@ typedef enum
@@ -19,7 +19,15 @@ index 00134cc..34934c9 100644
  } wifi_neighborScanMode_t;
  
  /**
-@@ -2842,7 +2843,9 @@ typedef struct {
+@@ -2112,6 +2113,7 @@ typedef enum
+     WIFI_MGMT_FRAME_TYPE_DISASSOC=8,
+     WIFI_MGMT_FRAME_TYPE_ACTION=9,
+     WIFI_MGMT_FRAME_TYPE_AUTH_RSP = 10,
++    WIFI_MGMT_FRAME_TYPE_BEACON = 11,
+ } wifi_mgmtFrameType_t;
+ 
+ typedef enum
+@@ -2842,7 +2844,9 @@ typedef struct {
  typedef struct {
      BOOL mld_enable;
      UINT mld_id;
@@ -29,7 +37,7 @@ index 00134cc..34934c9 100644
  } __attribute__((packed)) wifi_mld_common_info_t;
  
  typedef struct {
-@@ -2867,6 +2870,14 @@ typedef struct {
+@@ -2867,6 +2871,14 @@ typedef struct {
  } __attribute__((packed)) wifi_back_haul_sta_t;
  
  #define WIFI_AP_MAX_SSID_LEN    33
@@ -44,7 +52,7 @@ index 00134cc..34934c9 100644
  typedef struct {
      CHAR    ssid[WIFI_AP_MAX_SSID_LEN];
      BOOL    enabled;
-@@ -2894,6 +2905,8 @@ typedef struct {
+@@ -2894,6 +2906,8 @@ typedef struct {
      mac_address_t bssid;                    /**< The BSSID. This variable should only be used in the get API. It can't used to change the interface MAC */
      UINT   wmmNoAck;
      UINT   wepKeyLength;
@@ -53,7 +61,7 @@ index 00134cc..34934c9 100644
      BOOL   bssHotspot;
      UINT   wpsPushButton;
      char   beaconRateCtl[32];
-@@ -3055,4 +3068,4 @@ INT wifi_hal_analytics_callback_register(wifi_analytics_callback callback);
+@@ -3055,4 +3069,4 @@ INT wifi_hal_analytics_callback_register(wifi_analytics_callback callback);
  }
  #endif
  
