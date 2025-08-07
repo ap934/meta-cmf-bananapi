@@ -47,7 +47,10 @@ DISTRO_FEATURES_remove = " lan0_as_wan"
 #Need to enable below distro once required changes are merged 
 #DISTRO_FEATURES_append = " EasyMesh"
 #DISTRO_FEATURES_append = " sta_manager"
-PREFERRED_VERSION_go = "1.19.%"
+PREFERRED_VERSION_go = "1.24.%"
 
 #Enable wps support
 DISTRO_FEATURES_append = " wps_support"
+
+#Enable resource optimization
+DISTRO_FEATURES_append = " resource_optimization"
