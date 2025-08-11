@@ -12,5 +12,7 @@ RDEPENDS_packagegroup-ap-extender = "\
     ccsp-psm-ccsp \
     unified-wifi-mesh \
     ieee1905-em \
+    bpi-macaddress \
+    bpi-serialnumber \
 "
 DEPENDS += " ccsp-common-library"
