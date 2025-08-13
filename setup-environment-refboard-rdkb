@@ -95,6 +95,12 @@ if [ "X$FEATURE_TYPE" == "XEasyMesh" ]; then
     sed -i '/sta_manager/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
 fi
 
+if [ "X$FEATURE_TYPE" == "XExtender2" ]; then
+    cp ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/hal/files/InterfaceMap_em_ext1.json ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/hal/files/InterfaceMap_em_ext.json
+    sed -i 's/wifi1.1 info/wifi0.1 info/g' ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/ccsp/files/onewifi_pre_start_em_ext.sh
+    sed -i '/wifi1.1 type/s/^/#/' ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/ccsp/files/onewifi_pre_start_em_ext.sh
+fi
+
 if [ "X$BPI_IMG_TYPE" == "Xnand" ]; then
     sed -i '/sdmmc/s/^/#/' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
 else # SD card image is default

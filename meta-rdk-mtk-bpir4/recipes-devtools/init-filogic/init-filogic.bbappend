@@ -16,6 +16,8 @@ if [ $? -eq 0 ];then \
                 ifconfig lan${i} hw ether $LAN_MAC \
         fi \
    done \
+   BRLAN_MAC=`cat /nvram/mac_addresses.txt | grep -a brlan0 | cut -d " " -f 2` \
+   ifconfig brlan0 hw ether $BRLAN_MAC \
 fi' ${D}${sbindir}/init-bridge.sh
 }
 

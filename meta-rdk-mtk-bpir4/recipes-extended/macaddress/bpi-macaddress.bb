@@ -5,13 +5,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 inherit autotools ${@bb.utils.contains("DISTRO_FEATURES", "kirkstone", "python3native", "pythonnative", d)}  systemd
 
-SRC_URI = "${CMF_GITHUB_ROOT}/broadband-utils;protocol=https;nobranch=1"
+SRC_URI = "${CMF_GITHUB_ROOT}/broadband-utils;protocol=https;branch=develop"
 
 S = "${WORKDIR}/git"
 PV = "1.0.0"
-SRCREV = "10bae35768d234e969723aa51e9016f116f0870e"
+SRCREV = "d7510271e6860402dd6ecc30e50ebe530d7969bf"
 
 CXXFLAGS_append = "  -DAARCH64_BUILD"
+CXXFLAGS_append = "  ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', bb.utils.contains('DISTRO_FEATURES', 'em_extender', ' -D_EM_EXT_BUILD_ -D_EM_BUILD_ ',' -D_EM_BUILD_ ', d), ' ', d)}"
 
 
 do_compile() {
