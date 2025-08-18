@@ -56,7 +56,11 @@ do_install_append_class-target() {
            sed -i "/^After=/ s/$/ ApplySystemDefaults.service /g" ${D}${systemd_unitdir}/system/RdkWanManager.service
            sed -i "/^After=/ s/$/ ApplySystemDefaults.service /g" ${D}${systemd_unitdir}/system/RdkVlanManager.service
        fi
-    fi 
+    fi
+   if ${@bb.utils.contains('DISTRO_FEATURES', 'em_extender', 'true', 'false', d)}; then
+   sed -i '/^After=CcspPandMSsp\.service$/d' ${D}${systemd_unitdir}/system/onewifi.service
+   sed -i '$a [Install]\nWantedBy=multi-user.target' ${D}${systemd_unitdir}/system/onewifi.service
+   fi
 }
 
 
