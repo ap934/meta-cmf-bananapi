@@ -4,7 +4,6 @@ SRC_URI += "\
     file://parodus_read_file.sh \
     file://parodus_create_file.sh \
     file://webpa_pre_setup.sh \
-    file://webpa.service \
 "
 EXTRA_OECMAKE += "-DBUILD_BANANAPI_R4=ON "
  
