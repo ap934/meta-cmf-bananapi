@@ -81,14 +81,6 @@ index a55ede6..c172320 100644
      size_t                   ie_len;
      wifi_security_modes_t    sec_mode;
      wifi_encryption_method_t enc_method;
-@@ -832,6 +832,7 @@ typedef struct {
-      BOOL radio_presence[MAX_NUM_RADIOS];         /**< Indicates if the interfaces is present (not in deep sleep)*/
-      wifi_multi_link_info_t mu_info;
-      UINT BssMaxStaAllow;                    /**< Maximum number of stations supported for given platform. Gets populated during bring-up. */
-+     UINT colocated_mode;
- 
-     //Device Information related fields
-      CHAR manufacturer[DEFAULT_DEVICE_FIELD_LEN];
 diff --git a/wifi_hal_telemetry.h b/wifi_hal_telemetry.h
 index 6867002..3596ea0 100644
 --- a/wifi_hal_telemetry.h
