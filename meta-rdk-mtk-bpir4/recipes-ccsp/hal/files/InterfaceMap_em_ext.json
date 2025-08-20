@@ -21,17 +21,24 @@
                     "RadioName": "wifi1",
                     "InterfaceList": [
                         {
-                            "InterfaceName": "wifi1.1",
+                            "InterfaceName": "wifi1.2",
                             "Bridge": "brlan0",
                             "vlanId": 0,
                             "vapIndex": 3,
                             "vapName": "mesh_sta_5g"
                         },
                         {
-                            "InterfaceName": "wifi1",
+                            "InterfaceName": "wifi1.1",
                             "Bridge": "brlan0",
                             "vlanId": 0,
                             "vapIndex": 2,
+                            "vapName": "mesh_backhaul_5g"
+                        },
+                        {
+                            "InterfaceName": "wifi1",
+                            "Bridge": "brlan0",
+                            "vlanId": 0,
+                            "vapIndex": 1,
                             "vapName": "private_ssid_5g"
                         }
                         
@@ -41,13 +48,6 @@
                     "Index": 0,
                     "RadioName": "wifi0",
                     "InterfaceList": [
-                        {
-                            "InterfaceName": "wifi0.1",
-                            "Bridge": "brlan0",
-                            "vlanId": 0,
-                            "vapIndex": 1,
-                            "vapName": "mesh_backhaul_2g"
-                        },
                         {
                             "InterfaceName": "wifi0",
                             "Bridge": "brlan0",
