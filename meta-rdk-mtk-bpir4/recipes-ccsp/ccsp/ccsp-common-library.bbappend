@@ -73,7 +73,7 @@ SYSTEMD_SERVICE_${PN} += "gwprovapp.service"
 SYSTEMD_SERVICE_${PN} += "wan-initialized.target"
 SYSTEMD_SERVICE_${PN} += "wan-initialized.path"
 SYSTEMD_SERVICE_${PN}_remove = " utopia.service"
-SYSTEMD_SERVICE_${PN} += "${@bb.utils.contains('DISTRO_FEATURES','rdkb_wan_manager', ' CcspAdvSecuritySsp.service', '',d)}"
+SYSTEMD_SERVICE_${PN} += " CcspAdvSecuritySsp.service"
 
 FILES_${PN}_remove_onewifi = "${systemd_unitdir}/system/ccspwifiagent.service"
 FILES_${PN}_remove = "${systemd_unitdir}/system/utopia.service" 
@@ -85,5 +85,5 @@ FILES_${PN}_append = " \
    ${systemd_unitdir}/system/notifyComp.service \
    ${systemd_unitdir}/system/gwprovapp.service \
    ${systemd_unitdir}/system/gwprovapp.service.d/gwprovapp.conf \
+   ${systemd_unitdir}/system/CcspAdvSecuritySsp.service \
    "
-FILES_${PN}_append = "${@bb.utils.contains('DISTRO_FEATURES','rdkb_wan_manager', ' ${systemd_unitdir}/system/CcspAdvSecuritySsp.service', '',d)}"
