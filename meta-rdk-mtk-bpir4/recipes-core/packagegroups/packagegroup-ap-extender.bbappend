@@ -11,7 +11,7 @@ RDEPENDS_packagegroup-ap-extender = "\
     ccsp-psm \
     ccsp-psm-ccsp \
     unified-wifi-mesh \
-    ieee1905-em \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'with_alsap','ieee1905-em ','',d)} \
     bpi-macaddress \
     bpi-serialnumber \
 "

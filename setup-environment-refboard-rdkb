@@ -95,6 +95,15 @@ if [ "X$FEATURE_TYPE" == "XEasyMesh" ]; then
     sed -i '/sta_manager/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
 fi
 
+if [ "X$WITH_ALSAP" == "Xyes" ]; then
+    sed -i '/with_alsap/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
+    sed -i '/with_alsap/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi-ap-extender.inc
+fi
+
+if [ "X$FEATURE_TYPE" == "XEasyMesh" ] && [ "X$WITH_ALSAP" != "Xyes" ]; then
+    sed -i 's/$al_mac/$br_mac/g' ${_TOPDIR}/meta-cmf-broadband/recipes-ccsp/unified-wifi-mesh/files/setup_mysql_db_post.sh
+fi
+
 if [ "X$FEATURE_TYPE" == "XExtender2" ]; then
     cp ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/hal/files/InterfaceMap_em_ext1.json ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/hal/files/InterfaceMap_em_ext.json
     sed -i 's/wifi1.1 info/wifi0.1 info/g' ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/ccsp/files/onewifi_pre_start_em_ext.sh
