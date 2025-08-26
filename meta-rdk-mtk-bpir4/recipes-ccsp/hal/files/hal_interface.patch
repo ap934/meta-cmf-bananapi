@@ -68,19 +68,6 @@ index 00134cc..dca93e7 100644
 -#endif
 \ No newline at end of file
 +#endif
-diff --git a/wifi_hal_generic.h b/wifi_hal_generic.h
-index a55ede6..c172320 100644
---- a/wifi_hal_generic.h
-+++ b/wifi_hal_generic.h
-@@ -357,7 +357,7 @@ typedef struct {
-     unsigned short           caps;
-     unsigned int             beacon_int;
-     unsigned int             freq;
--    unsigned char            ie[256];
-+    unsigned char            ie[512];
-     size_t                   ie_len;
-     wifi_security_modes_t    sec_mode;
-     wifi_encryption_method_t enc_method;
 diff --git a/wifi_hal_telemetry.h b/wifi_hal_telemetry.h
 index 6867002..3596ea0 100644
 --- a/wifi_hal_telemetry.h
