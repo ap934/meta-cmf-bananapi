@@ -1,0 +1,15 @@
+Source: backport
+Subject: RDKBACCL-344: Bringup Telco Voice Manager in RDK-B BPI R4 router
+=================================================================
+Index: git/configure.ac
+===================================================================
+--- git.orig/configure.ac
++++ git/configure.ac
+@@ -8,6 +8,7 @@ AC_CANONICAL_HOST
+ 
+ # check existence of the package
+ AC_CONFIG_SRCDIR([main/asterisk.c])
++true || AC_CONFIG_SUBDIRS([menuselect])
+ 
+ AC_COPYRIGHT("Asterisk")
+ 
