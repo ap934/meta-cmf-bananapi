@@ -1,0 +1,16 @@
+Source: Aishwarya Natarajan <aishwarya_natarajan2@comcast.com>
+Subject: Adding Mac address changes for Bananapi R4
+
+Index: platform/rdkb_hal/src/platform/platform_hal.c
+===================================================================
+--- platform.orig/rdkb_hal/src/platform/platform_hal.c
++++ platform/rdkb_hal/src/platform/platform_hal.c
+@@ -174,7 +174,7 @@ INT platform_hal_GetBaseMacAddress(CHAR
+ {
+        if (pValue != NULL)
+        {
+-               const char *path = "/sys/class/net/eth1/address";
++               const char *path = "/sys/class/net/erouter0/address";
+                FILE *fp = fopen(path, "r");
+                if (fp != NULL)
+                {
