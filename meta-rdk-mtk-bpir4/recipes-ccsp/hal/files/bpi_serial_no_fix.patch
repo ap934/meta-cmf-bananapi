@@ -1,8 +1,6 @@
-Index: platform/rdkb_hal/src/platform/platform_hal.c
-===================================================================
---- platform.orig/rdkb_hal/src/platform/platform_hal.c
-+++ platform/rdkb_hal/src/platform/platform_hal.c
-@@ -106,7 +106,8 @@ INT platform_hal_GetSerialNumber(CHAR* p
+--- a/rdkb_hal/src/platform/platform_hal_o.c    2025-01-27 11:50:30.901265821 +0000
++++ b/rdkb_hal/src/platform/platform_hal.c      2025-01-27 11:51:17.596684633 +0000
+@@ -106,7 +106,8 @@
         if (pValue != NULL)
         {
                 INT arr[6] = {0};
@@ -12,7 +10,7 @@ Index: platform/rdkb_hal/src/platform/platform_hal.c
                 FILE *fp = fopen(path, "r");
                 if (fp != NULL)
                 {
-@@ -114,11 +115,12 @@ INT platform_hal_GetSerialNumber(CHAR* p
+@@ -114,11 +115,12 @@
                         char buf[64] = {0};
                         fgets(buf, sizeof(buf), fp);
                         fclose(fp);
