@@ -25,20 +25,3 @@
  		}
  	}
  	return RETURN_ERR;
-@@ -114,6 +114,7 @@
- 			char *end;
- 			char buf[64] = {0};
- 			fgets(buf, sizeof(buf), fp);
-+			buf[strcspn(buf, "\n")] = '\0';
- 			fclose(fp);
- 			/*if(6  == sscanf(buf, "%02x:%02x:%02x:%02x:%02x:%02x",&arr[0],&arr[1],&arr[2],&arr[3],&arr[4],&arr[5]))
- 			{
-@@ -173,7 +174,7 @@
- {
- 	if (pValue != NULL)
- 	{
--		const char *path = "/sys/class/net/eth1/address";
-+		const char *path = "/sys/class/net/erouter0/address";
- 		FILE *fp = fopen(path, "r");
- 		if (fp != NULL)
- 		{
