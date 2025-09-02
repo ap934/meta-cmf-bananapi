@@ -13,7 +13,7 @@
 @@ -114,11 +115,12 @@
  			char buf[64] = {0};
  			fgets(buf, sizeof(buf), fp);
- +  buf[strcspn(buf, "\n")] = '\0';
+    buf[strcspn(buf, "\n")] = '\0';
  			fclose(fp);
 -			if(6  == sscanf(buf, "%02x:%02x:%02x:%02x:%02x:%02x",&arr[0],&arr[1],&arr[2],&arr[3],&arr[4],&arr[5]))
 +			/*if(6  == sscanf(buf, "%02x:%02x:%02x:%02x:%02x:%02x",&arr[0],&arr[1],&arr[2],&arr[3],&arr[4],&arr[5]))
