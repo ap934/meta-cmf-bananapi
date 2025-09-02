@@ -1,5 +1,5 @@
---- rdkb_hal/src/platform/platform_hal_o.c	2025-09-02 15:07:01.840044668 +0000
-+++ rdkb_hal/src/platform/platform_hal.c	2025-09-02 15:07:05.880027661 +0000
+--- a/rdkb_hal/src/platform/platform_hal_o.c	2025-09-02 15:07:01.840044668 +0000
++++ b/rdkb_hal/src/platform/platform_hal.c	2025-09-02 15:07:05.880027661 +0000
 @@ -106,19 +106,22 @@
  	if (pValue != NULL)
  	{
