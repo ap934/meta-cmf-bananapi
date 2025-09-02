@@ -1,6 +1,6 @@
---- a/rdkb_hal/src/platform/platform_hal_o.c	2025-01-27 11:50:30.901265821 +0000
-+++ b/rdkb_hal/src/platform/platform_hal.c	2025-01-27 11:51:17.596684633 +0000
-@@ -106,7 +106,8 @@
+--- rdkb_hal/src/platform/platform_hal_o.c	2025-09-02 15:07:01.840044668 +0000
++++ rdkb_hal/src/platform/platform_hal.c	2025-09-02 15:07:05.880027661 +0000
+@@ -106,19 +106,22 @@
  	if (pValue != NULL)
  	{
  		INT arr[6] = {0};
@@ -10,19 +10,29 @@
  		FILE *fp = fopen(path, "r");
  		if (fp != NULL)
  		{
-@@ -114,11 +115,12 @@
+ 			char *end;
  			char buf[64] = {0};
  			fgets(buf, sizeof(buf), fp);
-    buf[strcspn(buf, "\n")] = '\0';
++			buf[strcspn(buf, "\n")] = '\0';
  			fclose(fp);
 -			if(6  == sscanf(buf, "%02x:%02x:%02x:%02x:%02x:%02x",&arr[0],&arr[1],&arr[2],&arr[3],&arr[4],&arr[5]))
 +			/*if(6  == sscanf(buf, "%02x:%02x:%02x:%02x:%02x:%02x",&arr[0],&arr[1],&arr[2],&arr[3],&arr[4],&arr[5]))
  			{
  				sprintf(pValue,"%02x%02x%02x%02x%02x%02x",arr[0],arr[1],arr[2],arr[3],arr[4],arr[5]);
  				return RETURN_OK;
--			}	
+-			}
 +			}*/
 +		        sprintf(pValue,"%s",buf);	
  		}
  	}
  	return RETURN_ERR;
+@@ -171,7 +174,7 @@
+ {
+ 	if (pValue != NULL)
+ 	{
+-		const char *path = "/sys/class/net/eth1/address";
++		const char *path = "/sys/class/net/erouter0/address";
+ 		FILE *fp = fopen(path, "r");
+ 		if (fp != NULL)
+ 		{
+   
