@@ -114,3 +114,15 @@ index 6867002..3596ea0 100644
 -#endif
 \ No newline at end of file
 +#endif
+diff --git a/wifi_hal_generic.h b/wifi_hal_generic.h
+index 87fc650..6dc7214 100644
+--- a/wifi_hal_generic.h
++++ b/wifi_hal_generic.h
+@@ -775,6 +775,7 @@ typedef struct {
+     unsigned int     phy_index;           /**< actual index of the phy device */
+     unsigned int     rdk_radio_index;     /**< radio index of upper layer */
+     wifi_interface_name_t  interface_name;
++	wifi_interface_name_t mld_interface_name; /**< MLD interface name. */
+     wifi_interface_name_t  bridge_name;
+     int              vlan_id;
+     unsigned int     index;
