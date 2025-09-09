@@ -30,14 +30,8 @@ CFLAGS_append = " \
 
 SRC_URI += " \
     file://.config \
-    file://libhostap.mk \
-"
-
-SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'file://2.11/Bpi_rdkwifilibhostap_2_11_changes.patch', 'file://2.10/Bpi_rdkwifilibhostap_2_10_changes.patch', d)}"
-SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'file://2.11/libhostap.mk', '', d)}"
-
-SRC_URI_append = " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', '\
+    file://2.11/libhostap.mk \
+    file://2.11/Bpi_rdkwifilibhostap_2_11_changes.patch \
     file://2.11/0001-mtk-hostapd-patch-all-in-one.patch;patchdir=source/hostap-2.11/ \
     file://2.11/comcast_changes_merged_to_source_2_11.patch \
     file://2.11/onewifi_lib_2_12.patch \
@@ -71,23 +65,17 @@ SRC_URI_append = " \
     file://2.11/open_auth_workaround.patch \
     file://2.11/mdu_radius_psk_auth_2_11.patch \
     file://2.11/supplicant_new.patch \
-    file://2.11/bpi.patch ', \
-    ' ', d)}"
+    file://2.11/bpi.patch \
+    "
 
 CFLAGS_append = " -D_PLATFORM_BANANAPI_R4_  -DCONFIG_SME -DCONFIG_GAS -DCONFIG_AP "
 
 EMULATOR_FEATURE_ENABLED = "${@bb.utils.contains('DISTRO_FEATURES', 'Wifi-test-suite', '1', '0', d)}"
 
-AP_FLAG = "${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', ' -DCONFIG_AP', '', d)}"
-CFLAGS_append = " ${@'${AP_FLAG}' if '${EMULATOR_FEATURE_ENABLED}' == '1' else ''} "
+EMULATOR_HOSTAPD_PATCH = " file://2.11/nl80211_change.patch "
+SRC_URI += "${@'${EMULATOR_HOSTAPD_PATCH}' if '${EMULATOR_FEATURE_ENABLED}' == '1' else ''}"
 
-HOSTAPD_PATCH_2_11 = "${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'file://2.11/nl80211_change.patch', '', d)}"
-SRC_URI += "${@'${HOSTAPD_PATCH_2_11}' if '${EMULATOR_FEATURE_ENABLED}' == '1' and d.getVar('PRIOR_BUILD', True) == 'false' else ''}"
-
-EMULATOR_SUPPLICANT_PATCH_2_11 = "${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'file://2.11/supplicant.patch', '', d)}"
-SRC_URI += "${@'${EMULATOR_SUPPLICANT_PATCH_2_11}' if '${EMULATOR_FEATURE_ENABLED}' == '1' and d.getVar('PRIOR_BUILD', True) == 'false' else ''}"
-
-EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', '--disable-static --enable-shared', '', d)}"
+EXTRA_OECONF += " --disable-static --enable-shared "
 
 S = "${WORKDIR}/git/"
 
@@ -96,7 +84,7 @@ FILES_${PN} = " \
 "
 EXTRA_OEMAKE += "${@bb.utils.contains('DISTRO_FEATURES', 'Wifi-test-suite', 'WIFI_EMULATOR=true', 'WIFI_EMULATOR=false', d)}"
 do_hostapd_patch () {
-    install -m 0644 ${WORKDIR}/.config ${WORKDIR}/libhostap.mk ${S}/source/hostap-${PV}/hostapd/
+    install -m 0644 ${WORKDIR}/.config ${WORKDIR}/2.11/libhostap.mk ${S}/source/hostap-${PV}/hostapd/
     echo "include libhostap.mk" >> ${S}/source/hostap-${PV}/hostapd/Makefile
 }
 
@@ -105,11 +93,11 @@ addtask hostapd_patch after do_patch before do_configure
 do_configure_append () {
     oe_runmake -C ${S}/source/hostap-${PV}/hostapd clean_libhostap
 
-    ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'echo "CONFIG_TESTING_OPTIONS=y" >> ${S}/source/hostap-${PV}/hostapd/.config', '',d)}
-    ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'echo "LIB_HDRS += ../src/common/nan.h" >> ${S}/source/hostap-${PV}/hostapd/libhostap.mk', '',d)}
-    ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'echo "LIB_HDRS += ../src/ap/ubus.h" >> ${S}/source/hostap-${PV}/hostapd/libhostap.mk', '',d)}
-    ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'echo "LIB_HDRS += ../src/ap/ucode.h" >> ${S}/source/hostap-${PV}/hostapd/libhostap.mk', '',d)}
-    ${@bb.utils.contains('DISTRO_FEATURES', 'HOSTAPD_2_11', 'echo "LIB_HDRS += ../src/utils/ucode.h" >> ${S}/source/hostap-${PV}/hostapd/libhostap.mk', '',d)}
+    echo "CONFIG_TESTING_OPTIONS=y" >> ${S}/source/hostap-${PV}/hostapd/.config
+    echo "LIB_HDRS += ../src/common/nan.h" >> ${S}/source/hostap-${PV}/hostapd/libhostap.mk
+    echo "LIB_HDRS += ../src/ap/ubus.h" >> ${S}/source/hostap-${PV}/hostapd/libhostap.mk
+    echo "LIB_HDRS += ../src/ap/ucode.h" >> ${S}/source/hostap-${PV}/hostapd/libhostap.mk
+    echo "LIB_HDRS += ../src/utils/ucode.h" >> ${S}/source/hostap-${PV}/hostapd/libhostap.mk
 }
 
 do_compile () {
@@ -120,8 +108,6 @@ do_configure_prepend () {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'Wifi-test-suite', 'true', 'false', d)}; then
         mv ${S}/source/hostap-${PV}/wpa_supplicant/rrm.c ${S}/source/hostap-${PV}/wpa_supplicant/rrm_test.c
     fi
-
-    cp ${WORKDIR}/2.11/libhostap.mk ${S}/source/hostap-${PV}/hostapd/
 }
 
 do_install () {
