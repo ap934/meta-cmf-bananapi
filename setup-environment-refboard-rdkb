@@ -95,6 +95,7 @@ if [ "X$FEATURE_TYPE" == "XEasyMesh" ]; then
     sed -i '/EasyMesh/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
     sed -i '/sta_manager/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
     sed -i '/with_alsap/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
+    sed -i '/generic_mlo/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
 fi
 
 if [ "X$FEATURE_TYPE" == "XEasyMesh" ] && [ "X$WITHOUT_ALSAP" == "Xyes" ]; then
