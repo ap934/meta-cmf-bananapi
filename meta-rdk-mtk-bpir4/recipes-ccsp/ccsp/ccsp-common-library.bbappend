@@ -49,6 +49,10 @@ do_install_append_class-target() {
 
    #SNMP SUPPORT
    sed -i "/tcp\:192.168.254.253\:705/a  ExecStart=\/usr\/bin\/snmp_subagent \&" ${D}${systemd_unitdir}/system/snmpSubAgent.service
+
+   #Updating the checkfilogicwifisupport.service
+   sed -i "s/forking/oneshot/g"  ${D}${systemd_unitdir}/system/checkfilogicwifisupport.service
+   sed -i "/ExecStart=/i RemainAfterExit=yes" ${D}${systemd_unitdir}/system/checkfilogicwifisupport.service
   
    if ${@bb.utils.contains('DISTRO_FEATURES', 'partner_default_ext', 'true', 'false', d)}; then
        sed -i "/^After=.*/a Requires=ApplySystemDefaults.service " ${D}${systemd_unitdir}/system/CcspPandMSsp.service
@@ -61,6 +65,7 @@ do_install_append_class-target() {
    sed -i '/^After=CcspPandMSsp\.service$/d' ${D}${systemd_unitdir}/system/onewifi.service
    sed -i '$a [Install]\nWantedBy=multi-user.target' ${D}${systemd_unitdir}/system/onewifi.service
    fi
+   sed -i '/IsErouterRunningStatus/,/fi/ s/^/#/' ${D}/usr/ccsp/ccspPAMCPCheck.sh
 }
 
 

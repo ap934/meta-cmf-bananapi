@@ -13,7 +13,7 @@ DISTRO_FEATURES_append = " halVersion3"
 DISTRO_FEATURES_append = " HOSTAPD_2_11"
 
 # OneWifi feature
-DISTRO_FEATURES_append = " OneWifi"
+DISTRO_FEATURES_append = " OneWifi onewifi_integration"
 
 # MacFilter Feature
 DISTRO_FEATURES_append = " disable_nl80211_acl"
@@ -47,6 +47,7 @@ DISTRO_FEATURES_remove = " lan0_as_wan"
 #Need to enable below distro once required changes are merged 
 #DISTRO_FEATURES_append = " EasyMesh"
 #DISTRO_FEATURES_append = " sta_manager"
+#DISTRO_FEATURES_append = " with_alsap"
 PREFERRED_VERSION_go = "1.24.%"
 
 #Enable wps support
@@ -54,3 +55,10 @@ DISTRO_FEATURES_append = " wps_support"
 
 #Enable resource optimization
 DISTRO_FEATURES_append = " resource_optimization"
+
+#Enable kernel_6_6 support
+#DISTRO_FEATURES_append = " kernel6-6"
+
+DISTRO_FEATURES_append = " CONFIG_IEEE80211BE"
+
+#DISTRO_FEATURES_append = " generic_mlo"
