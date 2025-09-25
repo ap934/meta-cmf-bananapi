@@ -9,6 +9,7 @@ iw phy phy0 interface add wifi1.1 type __ap
 iw phy phy0 interface add wifi1.2 type __ap
 iw phy phy0 interface add wifi1.3 type __ap
 iw phy phy0 interface add wifi2 type __ap
+iw phy phy0 interface add mld0 type __ap radios all
 
 #Obtain the wifi mac address
 wifi0_mac=`cat /nvram/mac_addresses.txt | grep -a wifi0 | cut -d " " -f 2 | head -n1`
@@ -47,6 +48,16 @@ ifconfig wifi1.1 up
 ifconfig wifi1.2 up
 ifconfig wifi1.3 up
 ifconfig wifi2 up
+
+# Set MLD interface address as wifi2 MAC address + 1
+prefix="${wifi2_mac%:*}"
+last_byte="${wifi2_mac##*:}"
+
+new_byte=$(printf "%02X" $(( (0x$last_byte + 1) & 0xFF )))
+new_mac="$prefix:$new_byte"
+
+ip link set dev "mld0" down
+ip link set dev "mld0" address "$new_mac"
 
 #To update al_mac addr in EasymesgCfg.json
 al_mac_addr=`cat /nvram/EasymeshCfg.json | grep AL_MAC_ADDR  | cut -d '"' -f4`
