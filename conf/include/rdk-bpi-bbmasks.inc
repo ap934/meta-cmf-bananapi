@@ -11,3 +11,4 @@ BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', '|meta-cmf-filogic
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES','EasyMesh','|openembedded-core/meta/recipes-devtools/rust/','',d)}"
 BBMASK .= "${@bb.utils.contains('DISTRO_FEATURES','EasyMesh','|meta-cmf-filogic/recipes-ccsp/ccsp/ccsp-one-wifi.bbappend','',d)}"
 BBMASK .= "|meta-cmf-filogic/recipes-ccsp/util/utopia-headers.bb"
+BBMASK .= "|meta-cmf-filogic/recipes-ccsp/hal/halinterface.bbappend"
