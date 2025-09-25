@@ -1,0 +1,8 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+
+SRC_URI_remove = "git://github.com/rdkcentral/rdkb-halif-wifi.git;protocol=https;branch=main"
+SRC_URI += "git://github.com/rdkcentral/rdkb-halif-wifi.git;protocol=https;branch=develop"
+
+SRCREV = "33b416471090929422a0b03a6a76d5bf5a36eb3a"
+
+SRC_URI += "file://sta-network.patch"
