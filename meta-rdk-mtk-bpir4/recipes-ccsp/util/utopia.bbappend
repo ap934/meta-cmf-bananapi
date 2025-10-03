@@ -83,7 +83,7 @@ echo "#SelfHeal
 
 #Custom Data Model
 \$custom_data_model_enabled=0
-\$custom_data_model_file_name=/usr/ccsp/tr069pa/custom_mapper.xml" 
+\$custom_data_model_file_name=/usr/ccsp/tr069pa/custom_mapper.xml 
 \$AutoReboot=true" >> ${D}${sysconfdir}/utopia/system_defaults
 
 #Remote management
