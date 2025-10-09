@@ -112,6 +112,7 @@ fi
 
 if [ "X$KERNEL_TYPE" == "Xkernel6-6" ]; then
     sed -i '/kernel6-6/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
+    sed -i '/kernel6-6/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi-ap-extender.inc
     echo 'RDEPENDS:${PN}-dev = ""' >> ${_TOPDIR}/meta-filogic/recipes-kernel/linux6-6-libc-headers/linux-libc-headers.inc
 fi
 
