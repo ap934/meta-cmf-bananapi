@@ -1281,4 +1281,5 @@
   <Record name="eRT.com.cisco.spvtg.ccsp.webpa.WebConfigRfcEnable" type="astr">true</Record>	 
   <!-- Default WPA3 transition start record -->
   <Record name="Device.DeviceInfo.X_RDKCENTRAL-COM_RFC.Feature.WPA3_Personal_Transition.Enable" type="astr">1</Record> 
+  <Record name="dmsb.device.deviceinfo.X_RDKCENTRAL-COM_WHIX.LogInterval" type="astr">3600</Record>	
 </Provision>
