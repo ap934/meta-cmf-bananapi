@@ -56,6 +56,9 @@ do_install_append_class-target() {
    #SNMP SUPPORT
    sed -i "/tcp\:192.168.254.253\:705/a  ExecStart=\/usr\/bin\/snmp_subagent \&" ${D}${systemd_unitdir}/system/snmpSubAgent.service
 
+   #Xdns service 
+   install -D -m 0644 ${S}/systemd_units/CcspXdnsSsp.service ${D}${systemd_unitdir}/system/CcspXdnsSsp.service
+
    #Updating the checkfilogicwifisupport.service
    sed -i "s/forking/oneshot/g"  ${D}${systemd_unitdir}/system/checkfilogicwifisupport.service
    sed -i "/ExecStart=/i RemainAfterExit=yes" ${D}${systemd_unitdir}/system/checkfilogicwifisupport.service
@@ -78,6 +81,7 @@ do_install_append_class-target() {
 SYSTEMD_SERVICE_${PN}_remove_onewifi = " ccspwifiagent.service"
 SYSTEMD_SERVICE_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', 'onewifi.service ', '', d)}"
 SYSTEMD_SERVICE_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', 'webconfig.service', '', d)}"
+SYSTEMD_SERVICE_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'RdkTelcoVoiceManager.service', '', d)}"
 SYSTEMD_SERVICE_${PN} += " CcspTelemetry.service"
 SYSTEMD_SERVICE_${PN} += " notifyComp.service"
 SYSTEMD_SERVICE_${PN} += "gwprovapp.service"
@@ -87,6 +91,7 @@ SYSTEMD_SERVICE_${PN} += "parodus.service"
 SYSTEMD_SERVICE_${PN} += "webpa.service"
 SYSTEMD_SERVICE_${PN}_remove = " utopia.service"
 SYSTEMD_SERVICE_${PN} += " CcspAdvSecuritySsp.service"
+SYSTEMD_SERVICE_${PN} += "CcspXdnsSsp.service"
 
 FILES_${PN}_remove_onewifi = "${systemd_unitdir}/system/ccspwifiagent.service"
 FILES_${PN}_remove = "${systemd_unitdir}/system/utopia.service" 
@@ -97,6 +102,7 @@ FILES_${PN}_append = " \
    ${systemd_unitdir}/system/CcspTelemetry.service \
    ${systemd_unitdir}/system/notifyComp.service \
    ${systemd_unitdir}/system/gwprovapp.service \
+   ${systemd_unitdir}/system/CcspXdnsSsp.service \
    ${systemd_unitdir}/system/gwprovapp.service.d/gwprovapp.conf \
    ${systemd_unitdir}/system/parodus.service \
    ${systemd_unitdir}/system/webpa.service \
