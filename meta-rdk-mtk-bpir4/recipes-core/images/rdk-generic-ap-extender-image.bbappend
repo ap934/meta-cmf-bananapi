@@ -59,7 +59,6 @@ IMAGE_INSTALL += " \
     strongswan \
     libpcap \
     tcpdump \
-    ${@bb.utils.contains('DISTRO_FEATURES','kernel6-6','linux-firmware-mt7988  linux-firmware-airoha fitblk','airoha-eth-firmware',d)} \
     ${@bb.utils.contains('DISTRO_FEATURES','kernel6-6','','perf',d)} \
     ${@bb.utils.contains('DISTRO_FEATURES','mt76','packagegroup-filogic-mt76','',d)} \
     ${@bb.utils.contains('DISTRO_FEATURES','em_extender','packagegroup-ap-extender','',d)} \
