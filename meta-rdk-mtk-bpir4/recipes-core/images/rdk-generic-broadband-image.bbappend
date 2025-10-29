@@ -1,5 +1,5 @@
 #WebPA Feature
-IMAGE_INSTALL_append = " parodus parodus2ccsp"
+IMAGE_INSTALL_append = " parodus parodus2ccsp rdktelcovoicemanager asterisk hal-voice-asterisk"
 
 #TR069 Feature
 IMAGE_INSTALL_append = " ccsp-tr069-pa"
@@ -66,3 +66,4 @@ do_filogic_gen_image(){
 IMAGE_INSTALL_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'ppp-enabled', '', 'pptp-linux rp-pppoe xl2tpd', d)}"
 IMAGE_INSTALL_append = "${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh',' unified-wifi-mesh unified-wifi-mesh-cli socat','',d)}"
 IMAGE_INSTALL_append = "${@bb.utils.contains('DISTRO_FEATURES', 'with_alsap',' ieee1905-em ','',d)}"
+IMAGE_INSTALL_remove += " mtkhnat-util"
