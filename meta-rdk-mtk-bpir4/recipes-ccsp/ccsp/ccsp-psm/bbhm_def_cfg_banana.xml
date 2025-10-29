@@ -214,6 +214,9 @@
   <Record name="eRT.com.cisco.spvtg.ccsp.tr181pa.Device.WiFi.Radio.2.FactoryResetSSID" type="astr">0</Record>
   <Record name="eRT.com.cisco.spvtg.ccsp.tr181pa.Device.WiFi.SsidUpgradeRequired" type="astr">1</Record>
 
+ <!-- Ethernet interfaces of BananaPi Pi -->
+  <Record name="dmsb.ethagent.ethifcount" type="astr">4</Record>
+
   <Record name="dmsb.BridgeNamePrefix" type="astr">brlan</Record>
   <Record name="dmsb.bridgeVlanRange" type="astr">164...512</Record>
 
