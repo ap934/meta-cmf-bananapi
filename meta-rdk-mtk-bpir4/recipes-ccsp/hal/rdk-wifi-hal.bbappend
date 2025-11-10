@@ -1,11 +1,12 @@
 SRC_URI_remove = "git://github.com/rdkcentral/rdk-wifi-hal.git;protocol=https;branch=main;name=rdk-wifi-hal"
 
 SRC_URI += "git://github.com/rdkcentral/rdk-wifi-hal.git;protocol=https;branch=develop;name=rdk-wifi-hal"
-SRCREV_rdk-wifi-hal = "044b39b511a0b4b65eeca3685283e91e4d9a90e5"
+SRCREV_rdk-wifi-hal = "2be1439ea39a54d444f6591465afb6fed51e2c36"
 
 CFLAGS_append = " -D_PLATFORM_BANANAPI_R4_  -DBANANA_PI_PORT  -DFEATURE_SINGLE_PHY -DCONFIG_HW_CAPABILITIES "
 
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'generic_mlo', ' -DCONFIG_GENERIC_MLO ', '', d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'generic_mlo', ' -DCONFIG_GENERIC_MLO -DCONFIG_MLO ', '', d)}"
+CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'kernel6-6' , ' -DKERNEL_6_6 ','', d)}"
 
 CFLAGS_append_kirkstone = " -fcommon"
 CFLAGS_remove = "-DCONFIG_MBO"

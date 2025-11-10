@@ -114,6 +114,12 @@ if [ "X$KERNEL_TYPE" == "Xkernel6-6" ]; then
     sed -i '/kernel6-6/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
     sed -i '/kernel6-6/s/^#//' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi-ap-extender.inc
     echo 'RDEPENDS:${PN}-dev = ""' >> ${_TOPDIR}/meta-filogic/recipes-kernel/linux6-6-libc-headers/linux-libc-headers.inc
+    if [ ! -e ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/kernel_6_6_patches_copied ];then
+    mv  ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/files/kernel6-6-patches/patches.inc ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/files/kernel6-6-patches/patches.inc_updated
+    cp ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/files/kernel6-6-patches/* ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/rdk-wifi-libhostap/files/2.11/kernel_6_6
+    rm ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/rdk-wifi-libhostap/files/2.11/kernel_6_6/patches.inc_updated
+    touch ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/kernel_6_6_patches_copied
+    fi
 fi
 
 if [ "X$BPI_IMG_TYPE" == "Xnand" ]; then
