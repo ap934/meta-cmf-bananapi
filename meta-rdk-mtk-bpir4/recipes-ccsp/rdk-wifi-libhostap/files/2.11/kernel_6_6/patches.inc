@@ -270,4 +270,5 @@ SRC_URI:append = " \
     file://mdu_radius_psk_auth_2_11.patch \
     file://supplicant_new.patch \
     file://bpi.patch \
+    file://fixed_disassoc_after_assoc_retry.patch \
     "
