@@ -6,6 +6,9 @@ SRCREV_FORMAT = "1.0.0"
 
 SRC_URI += "file://bpi_custom_device.properties"
 
+# To Enable the dropbear service
+SYSTEMD_SERVICE:${PN}:append = "${@bb.utils.contains('DISTRO_FEATURES', 'em_extender', ' dropbear.service', '', d)}"
+
 do_install_append () {
    install -m 644 ${WORKDIR}/bpi_custom_device.properties ${D}${sysconfdir}/device.properties
    ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', 'echo "OneWiFiEnabled=true" >> ${D}${sysconfdir}/device.properties', '', d)}
@@ -22,9 +25,4 @@ do_install_append () {
    # Changing CLOUDURL and DCM_LOG_SERVER_URL values with migrated server
    sed -i -e 's|^CLOUDURL=.*$|CLOUDURL="https://xconf.rdkcentral.com/xconf/swu/stb?eStbMac="|' ${D}${sysconfdir}/include.properties
    sed -i -e 's|^DCM_LOG_SERVER_URL=.*$|DCM_LOG_SERVER_URL=https://xconf.rdkcentral.com/loguploader/getSettings|' ${D}${sysconfdir}/dcm.properties
-   # To Enable the dropbear service
-   EM_EXT_ENABLED="${@bb.utils.contains('DISTRO_FEATURES','em_extender','true','false',d)}"
-   if [ $EM_EXT_ENABLED = 'true' ]; then
-       sed -i '117 s/^/#/' ${TOPDIR}/../meta-cmf-filogic/recipes-rdkb/sysint-broadband/sysint-broadband.bbappend
-   fi
 }
