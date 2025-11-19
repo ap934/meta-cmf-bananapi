@@ -36,4 +36,5 @@ SRC_URI:append = " \
     file://supplicant_new.patch \
     file://bpi.patch \
     file://mlo_fix.patch \
+    file://fixed_disassoc_after_assoc_retry.patch \
     "
