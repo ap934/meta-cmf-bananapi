@@ -6,6 +6,7 @@ SRC_URI_append = " \
     file://rdkb_cfg/iptables_nf.cfg \
     file://rdkb_cfg/bridge_mode.cfg \
     file://rdkb_cfg/coredump.cfg \
+    file://rdkb_cfg/ip6tables_nf.cfg \
     file://netfilter.cfg  \
     ${@bb.utils.contains('DISTRO_FEATURES','kernel6-6', 'file://rdkb_cfg/kernel_6_6.cfg', '', d)}  \
     file://rdkb_cfg/container.cfg \
