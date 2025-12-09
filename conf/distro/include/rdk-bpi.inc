@@ -30,9 +30,6 @@ DISTRO_FEATURES_append = " CPUPROCANALYZER_BROADBAND"
 # RDKB-51565,RDKB-50795: [HAL] Cellular Hal Implementation
 DISTRO_FEATURES_append = " rdkb_cellular_manager_mm"
 
-#Dac Feature support for BPIR4 device.
-DISTRO_FEATURES_append = " dac"
-
 DISTRO_FEATURES_append = " partner_default_ext"
 
 #Enable SDcard image as default
