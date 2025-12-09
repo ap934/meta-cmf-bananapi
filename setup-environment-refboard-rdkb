@@ -97,14 +97,8 @@ if [ "X$FEATURE_TYPE" == "XEasyMesh" ] && [ "X$WITHOUT_ALSAP" == "Xyes" ]; then
 fi
 
 
+
 echo 'RDEPENDS:${PN}-dev = ""' >> ${_TOPDIR}/meta-filogic/recipes-kernel/linux6-6-libc-headers/linux-libc-headers.inc
-if [ ! -e ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/kernel_6_6_patches_copied ];then
-mv  ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/files/kernel6-6-patches/patches.inc ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/files/kernel6-6-patches/patches.inc_updated
-cp ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/files/kernel6-6-patches/* ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/rdk-wifi-libhostap/files/2.11/kernel_6_6
-rm ${_TOPDIR}/meta-cmf-bananapi/meta-rdk-mtk-bpir4/recipes-ccsp/rdk-wifi-libhostap/files/2.11/kernel_6_6/patches.inc_updated
-mv  ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/files/kernel6-6-patches/patches.inc_updated ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/files/kernel6-6-patches/patches.inc
-touch ${_TOPDIR}/meta-filogic/recipes-wifi/hostapd/kernel_6_6_patches_copied
-fi
 
 if [ "X$BPI_IMG_TYPE" == "Xnand" ]; then
     sed -i '/sdmmc/s/^/#/' ${_TOPDIR}/meta-cmf-bananapi/conf/distro/include/rdk-bpi.inc
