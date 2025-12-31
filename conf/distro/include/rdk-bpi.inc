@@ -66,3 +66,6 @@ DISTRO_FEATURES_append = " CONFIG_IEEE80211BE"
 
 #Enable the below DISTRO to enable Hybrid Hal(rndis/modem) for cellular devices
 #DISTRO_FEATURES_append_broadband = " cellular_hybrid_support"
+
+#Disable rdm-agent for reference platform
+#DISTRO_FEATURES_append = "RDM"
