@@ -22,6 +22,8 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'sta_manager', '-DONEW
 EXTRA_OECONF_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' ONEWIFI_CAC_APP_SUPPORT=true ', '', d)}"
 CFLAGS_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' -DONEWIFI_CAC_APP_SUPPORT -DONEWIFI_DB_SUPPORT  ', '', d)}"
 
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'generic_mlo', ' -DCONFIG_GENERIC_MLO ', '', d)}"
+
 EXTRA_OECONF_append = " ONEWIFI_CSI_APP_SUPPORT=true"
 EXTRA_OECONF_append = " ONEWIFI_MOTION_APP_SUPPORT=true"
 EXTRA_OECONF_append = " ONEWIFI_HARVESTER_APP_SUPPORT=true"
