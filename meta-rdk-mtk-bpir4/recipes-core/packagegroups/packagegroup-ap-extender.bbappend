@@ -14,5 +14,6 @@ RDEPENDS_packagegroup-ap-extender = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'with_alsap','ieee1905-em ','',d)} \
     bpi-macaddress \
     bpi-serialnumber \
+    mount-nvram \
 "
 DEPENDS += " ccsp-common-library"
