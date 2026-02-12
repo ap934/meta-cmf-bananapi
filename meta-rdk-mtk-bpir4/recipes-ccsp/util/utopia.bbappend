@@ -51,14 +51,6 @@ fi
 install -m 755 ${WORKDIR}/service_bridge_bpi.sh ${D}${sysconfdir}/utopia/service.d/
 install -m 755 ${WORKDIR}/service_bridge_bpi.sh ${D}${sysconfdir}/utopia/service.d/service_bridge.sh
 
-    install -m 755 ${S}/source/scripts/init/syslog_conf/log_start.sh ${D}${sbindir}/
-    install -m 755 ${S}/source/scripts/init/syslog_conf/log_handle.sh ${D}${sbindir}/
-    install -m 755 ${S}/source/scripts/init/syslog_conf/syslog_conf_tool.sh ${D}${sbindir}/
-    install -m 644 ${S}/source/scripts/init/service.d/event_flags ${D}${sysconfdir}/utopia/service.d/
-    install -m 644 ${S}/source/scripts/init/service.d/rt_tables ${D}${sysconfdir}/utopia/service.d/rt_tables
-    install -d ${D}${sysconfdir}/utopia/service.d/service_syslog
-
-
 sed -i '/^#TOT_MSG_MAX=\$/s/^#//' ${D}${sysconfdir}/utopia/utopia_init.sh
 
 #Adding self heal defaults
@@ -107,16 +99,17 @@ sed -i 's/^\(\$mgmt_wan_httpaccess=\)1/\10/' ${D}${sysconfdir}/utopia/system_def
 sed -i 's/^\(\$mgmt_wan_httpsport=\)443/\18181/' ${D}${sysconfdir}/utopia/system_defaults
 sed -i '/mgmt_wan_httpaccess/i \$mgmt_wan_httpaccess_ert=1' ${D}${sysconfdir}/utopia/system_defaults
 
- install -m 755 ${S}/source/scripts/init/service.d/service_syslog/*.sh ${D}${sysconfdir}/utopia/service.d/service_syslog
+install -d ${D}${sysconfdir}/utopia/service.d/service_syslog
+install -m 755 ${S}/source/scripts/init/service.d/service_syslog/*.sh ${D}${sysconfdir}/utopia/service.d/service_syslog
 install -m 644 ${S}/source/scripts/init/syslog_conf/syslog.conf_default ${D}${sysconfdir}/
-    install -D -m 644 ${S}/source/scripts/init/syslog_conf/syslog.conf_default ${D}/fss/gw/${sysconfdir}/syslog.conf.${BPN}
-    install -m 755 ${S}/source/scripts/init/syslog_conf/log_start.sh ${D}${sbindir}/
-    install -m 755 ${S}/source/scripts/init/syslog_conf/log_handle.sh ${D}${sbindir}/
-    install -m 755 ${S}/source/scripts/init/syslog_conf/syslog_conf_tool.sh ${D}${sbindir}/
-    install -m 644 ${S}/source/scripts/init/service.d/event_flags ${D}${sysconfdir}/utopia/service.d/
-    install -m 644 ${S}/source/scripts/init/service.d/rt_tables ${D}${sysconfdir}/utopia/service.d/rt_tables
-    ln -sf /usr/sbin/log_start.sh ${D}/fss/gw/usr/sbin/log_start.sh
-    ln -sf /usr/sbin/log_handle.sh ${D}/fss/gw/usr/sbin/log_handle.sh
+install -D -m 644 ${S}/source/scripts/init/syslog_conf/syslog.conf_default ${D}/fss/gw/${sysconfdir}/syslog.conf.${BPN}
+install -m 755 ${S}/source/scripts/init/syslog_conf/log_start.sh ${D}${sbindir}/
+install -m 755 ${S}/source/scripts/init/syslog_conf/log_handle.sh ${D}${sbindir}/
+install -m 755 ${S}/source/scripts/init/syslog_conf/syslog_conf_tool.sh ${D}${sbindir}/
+install -m 644 ${S}/source/scripts/init/service.d/event_flags ${D}${sysconfdir}/utopia/service.d/
+install -m 644 ${S}/source/scripts/init/service.d/rt_tables ${D}${sysconfdir}/utopia/service.d/rt_tables
+ln -sf /usr/sbin/log_start.sh ${D}/fss/gw/usr/sbin/log_start.sh
+ln -sf /usr/sbin/log_handle.sh ${D}/fss/gw/usr/sbin/log_handle.sh
 
 
 
