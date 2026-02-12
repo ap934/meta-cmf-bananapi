@@ -47,7 +47,6 @@ DISTRO_FEATURES_remove = " lan0_as_wan"
 
 #Need to enable below distro once required changes are merged 
 #DISTRO_FEATURES_append = " EasyMesh"
-#DISTRO_FEATURES_append = " sta_manager"
 #DISTRO_FEATURES_append = " with_alsap"
 #DISTRO_FEATURES_append = " Em_Unittest"
 PREFERRED_VERSION_go = "1.24.%"
