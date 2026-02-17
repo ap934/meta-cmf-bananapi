@@ -38,15 +38,14 @@ SRC_URI += " \
     file://wifi_defaults.txt \
 "
 do_install_append(){
-    install -d ${D}/nvram 
     install -m 777 ${WORKDIR}/checkwifi.sh ${D}/usr/ccsp/wifi/
     install -m 777 ${WORKDIR}/onewifi_pre_*.sh ${D}/usr/ccsp/wifi/onewifi_pre_start.sh
-    install -m 644 ${WORKDIR}/wifi_defaults.txt ${D}/nvram/
+    install -m 644 ${WORKDIR}/wifi_defaults.txt ${D}/usr/ccsp/wifi/
 }
 
 FILES_${PN} += " \
     ${prefix}/ccsp/wifi/checkwifi.sh \
     ${prefix}/ccsp/wifi/onewifi_pre_start.sh \
     /usr/bin/wifi_events_consumer \
-    /nvram/wifi_defaults.txt \
+    /usr/ccsp/wifi/wifi_defaults.txt \
 "

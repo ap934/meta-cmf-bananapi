@@ -21,16 +21,19 @@ SRC_URI += " \
   ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', bb.utils.contains('DISTRO_FEATURES', 'em_extender', 'file://EasymeshCfg_ext.json ','file://EasymeshCfg.json ', d), ' ', d)} \
 "
 
-# Install InterfaceMap.json in /nvram
+# Install InterfaceMap.json in /usr/ccsp/wifi
 do_install_append() {
-  install -d ${D}/nvram
-  install -m 0644 ${WORKDIR}/InterfaceMa*.json ${D}/nvram/InterfaceMap.json
+  install -d ${D}/usr/ccsp/wifi
+  install -m 0644 ${WORKDIR}/InterfaceMa*.json ${D}/usr/ccsp/wifi/InterfaceMap.json
   DISTRO_EM_ENABLED="${@bb.utils.contains('DISTRO_FEATURES','EasyMesh','true','false',d)}"
   if [ $DISTRO_EM_ENABLED = 'true' ]; then
-     install -m 0644 ${WORKDIR}/Easymesh*.json  ${D}/nvram/EasymeshCfg.json 
+     install -d ${D}/usr/ccsp/EasyMesh
+     install -m 0644 ${WORKDIR}/Easymesh*.json  ${D}/usr/ccsp/EasyMesh/EasymeshCfg.json
   fi
 }
 
 FILES_${PN} += " \
-  /nvram/* \
+  /usr/ccsp/wifi/* \
 "
+
+FILES_${PN}_append = "${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' /usr/ccsp/EasyMesh/* ', '', d)}"
