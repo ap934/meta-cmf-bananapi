@@ -5,8 +5,6 @@ DISTRO_FEATURES_append = " WanManagerUnificationEnable"
 
 DISTRO_FEATURES_append = " rdkb_wan_manager"
 
-CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '-DFEATURE_RDKB_WAN_MANAGER', '', d)}"
-
 DISTRO_FEATURES_append = " halVersion3"
 
 #rdk-wifi-libhostap support for broadband
@@ -69,3 +67,5 @@ DISTRO_FEATURES_append = " generic_mlo"
 
 #Disable rdm-agent for reference platform
 #DISTRO_FEATURES_append = "RDM"
+
+DISTRO_FEATURES_append = " dhcp_manager "
