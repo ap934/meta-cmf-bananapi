@@ -69,3 +69,4 @@ DISTRO_FEATURES_append = " generic_mlo"
 #DISTRO_FEATURES_append = "RDM"
 
 DISTRO_FEATURES_append = " dhcp_manager "
+DISTRO_FEATURES_append = " rdkb_configurable_wan_interface"
