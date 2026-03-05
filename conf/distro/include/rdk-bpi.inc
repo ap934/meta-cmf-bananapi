@@ -68,4 +68,5 @@ DISTRO_FEATURES_append = " generic_mlo"
 #DISTRO_FEATURES_append_broadband = " cellular_hybrid_support"
 
 #Disable rdm-agent for reference platform
-#DISTRO_FEATURES_append = "RDM"
+DISTRO_FEATURES_append = " RDM"
+DISTRO_FEATURES_append = " rrd"
