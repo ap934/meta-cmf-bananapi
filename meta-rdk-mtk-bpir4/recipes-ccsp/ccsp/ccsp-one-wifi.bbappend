@@ -48,4 +48,5 @@ FILES_${PN} += " \
     ${prefix}/ccsp/wifi/onewifi_pre_start.sh \
     /usr/bin/wifi_events_consumer \
     /usr/ccsp/wifi/wifi_defaults.txt \
+    /usr/lib/libwifi* \
 "
