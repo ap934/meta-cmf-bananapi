@@ -1,5 +1,6 @@
 include ccsp_common_bananapi.inc
 
+SRCREV_ccsp_common_library = "2bb388fda59494cd3cf3a9e2139aa3d7dc537edb"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:${THISDIR}/files:"
 SRC_URI_append = " \
                    file://gwprovapp.conf \
@@ -14,7 +15,6 @@ do_install_append_class-target() {
    sed -i "/WorkingDirectory=/a ExecStartPre\=\/bin/sh -c '\/lib/rdk/webpa_pre_setup.sh'\\;" ${D}${systemd_unitdir}/system/webpa.service
 
    sed -i 's#${PARODUS_START_LOG_FILE}#/rdklogs/logs/dcmrfc.log#g' ${D}${systemd_unitdir}/system/rfc.service
-   sed -i 's/rfc.service /RFCbase.sh /g' ${D}${systemd_unitdir}/system/rfc.service
 
    DISTRO_OneWiFi_ENABLED="${@bb.utils.contains('DISTRO_FEATURES','OneWifi','true','false',d)}"
    if [ $DISTRO_OneWiFi_ENABLED = 'true' ]; then
