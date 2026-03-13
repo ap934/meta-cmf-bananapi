@@ -1,7 +1,45 @@
 #Remove duplicate package installation in populate sdk
+# Only install specific firmware packages
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
+# Define only the packages we need
+PACKAGES =+ " \
+    ${PN}-bcm-bt \
+    ${PN}-brcm \
+    ${PN}-rtl-bt \
+"
+
+# Specify files for each package
+FILES:${PN}-bcm-bt = " \
+    ${nonarch_base_libdir}/firmware/brcm/BCM* \
+"
+
+FILES:${PN}-brcm = " \
+    ${nonarch_base_libdir}/firmware/brcm/* \
+"
+
+FILES:${PN}-rtl-bt = " \
+    ${nonarch_base_libdir}/firmware/rtl_bt/* \
+"
+
+# Dependencies
+RDEPENDS:${PN}-bcm-bt += "${PN}-brcm"
+
+# Remove all other firmware packages
+do_install:append() {
+    # Remove everything except brcm, rtl_bt, airoha and mediatek directories
+    find ${D}${nonarch_base_libdir}/firmware -mindepth 1 -maxdepth 1 \
+       ! -name 'brcm' ! -name 'rtl_bt'  ! -name 'airoha'  ! -name 'mediatek' -exec rm -rf {} +
+}
+
+# Update RRECOMMENDS to include only what we need
+RRECOMMENDS:${PN}-nonfreefirmware = "\
+    ${PN}-bcm-bt \
+    ${PN}-brcm \
+    ${PN}-rtl-bt \
+"
 do_install_append() {
                 rm -rf ${D}${base_libdir}/firmware/mediatek/mt7996
-                rm -rf ${D}${base_libdir}/firmware/mediatek/mt7988
                 rm -rf ${D}${base_libdir}/firmware/mediatek/mt7996/mt7996*
 }
 
