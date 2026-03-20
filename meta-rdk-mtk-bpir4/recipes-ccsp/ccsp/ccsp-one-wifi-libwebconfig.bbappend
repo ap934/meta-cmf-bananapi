@@ -1,7 +1,10 @@
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+
 SRC_URI_remove = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/OneWifi;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=libwebconfig"
 
 SRC_URI = "git://github.com/rdkcentral/OneWifi.git;protocol=https;branch=develop;name=libwebconfig"
-SRCREV_libwebconfig = "476a6e0c10c7906717b3f2e04450f523c0055927"
+SRC_URI += " file://0001-RDKBACCL-1522-Fixing-mesh-backhaul-instablity.patch"
+SRCREV_libwebconfig = "904bf7630b000032587258521e7fa35c0709e451"
 
 DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' rdk-wifi-libhostap unified-wifi-mesh-header ', '', d)}"
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' --enable-easymesh ', '', d)}"
