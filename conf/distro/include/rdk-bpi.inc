@@ -70,3 +70,7 @@ DISTRO_FEATURES_append = " generic_mlo"
 #Disable rdm-agent for reference platform
 DISTRO_FEATURES_append = " RDM"
 DISTRO_FEATURES_append = " rrd"
+
+#Enable MAP-T
+DISTRO_FEATURES_append = " feature_mapt"
+DISTRO_FEATURES_append = " nat46"
