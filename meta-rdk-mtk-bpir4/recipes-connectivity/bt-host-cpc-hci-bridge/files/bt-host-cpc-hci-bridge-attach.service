@@ -2,6 +2,7 @@
 Description=Attach Bluetooth HCI Bridge
 After=bt-host-cpc-hci-bridge.service
 Requires=bt-host-cpc-hci-bridge.service
+BindsTo=bt-host-cpc-hci-bridge.service
 
 [Service]
 Type=simple
