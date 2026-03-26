@@ -1,7 +1,7 @@
 SRC_URI_remove = "git://github.com/rdkcentral/rdk-wifi-hal.git;protocol=https;branch=main;name=rdk-wifi-hal"
 
 SRC_URI += "git://github.com/rdkcentral/rdk-wifi-hal.git;protocol=https;branch=develop;name=rdk-wifi-hal"
-SRCREV_rdk-wifi-hal = "783ce174a08eb37a77ba8730437eba1b665dbe06"
+SRCREV_rdk-wifi-hal = "0f95708a6ad70bea49a209494d51fc04f24f2d4c"
 
 CFLAGS_append = " -D_PLATFORM_BANANAPI_R4_  -DBANANA_PI_PORT  -DFEATURE_SINGLE_PHY -DCONFIG_HW_CAPABILITIES "
 
@@ -21,16 +21,19 @@ SRC_URI += " \
   ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', bb.utils.contains('DISTRO_FEATURES', 'em_extender', 'file://EasymeshCfg_ext.json ','file://EasymeshCfg.json ', d), ' ', d)} \
 "
 
-# Install InterfaceMap.json in /nvram
+# Install InterfaceMap.json in /usr/ccsp/wifi
 do_install_append() {
-  install -d ${D}/nvram
-  install -m 0644 ${WORKDIR}/InterfaceMa*.json ${D}/nvram/InterfaceMap.json
+  install -d ${D}/usr/ccsp/wifi
+  install -m 0644 ${WORKDIR}/InterfaceMa*.json ${D}/usr/ccsp/wifi/InterfaceMap.json
   DISTRO_EM_ENABLED="${@bb.utils.contains('DISTRO_FEATURES','EasyMesh','true','false',d)}"
   if [ $DISTRO_EM_ENABLED = 'true' ]; then
-     install -m 0644 ${WORKDIR}/Easymesh*.json  ${D}/nvram/EasymeshCfg.json 
+     install -d ${D}/usr/ccsp/EasyMesh
+     install -m 0644 ${WORKDIR}/Easymesh*.json  ${D}/usr/ccsp/EasyMesh/EasymeshCfg.json
   fi
 }
 
 FILES_${PN} += " \
-  /nvram/* \
+  /usr/ccsp/wifi/* \
 "
+
+FILES_${PN}_append = "${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' /usr/ccsp/EasyMesh/* ', '', d)}"
