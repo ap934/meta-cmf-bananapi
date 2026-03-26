@@ -20,3 +20,4 @@ GWPROVAPP = "${@bb.utils.contains('DISTRO_FEATURES','rdkb_wan_manager','ccsp-gwp
 RDEPENDS_packagegroup-rdk-ccsp-broadband_append = "${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_cellular_manager_mm', ' rdk-cellularmanager-mm', ' ', d)}"
 RDEPENDS_packagegroup-rdk-ccsp-broadband_append = " rdktelcovoicemanager"
 RDEPENDS_packagegroup-rdk-ccsp-broadband_append = " gw-lan-refresh"
+RDEPENDS_packagegroup-rdk-ccsp-broadband_append = " mount-nvram"
