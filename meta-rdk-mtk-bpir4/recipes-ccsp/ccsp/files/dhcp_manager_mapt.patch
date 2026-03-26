@@ -1,0 +1,83 @@
+diff --git a/source/DHCPMgrUtils/dhcpmgr_map_apis.c b/source/DHCPMgrUtils/dhcpmgr_map_apis.c
+index eb39e1b..52e2763 100644
+--- a/source/DHCPMgrUtils/dhcpmgr_map_apis.c
++++ b/source/DHCPMgrUtils/dhcpmgr_map_apis.c
+@@ -406,7 +406,7 @@ ANSC_STATUS DhcpMgr_MaptParseOpt95Response
+ (
+     const PCHAR          pPdIPv6Prefix,
+     PUCHAR         pOptionBuf,
+-    ipc_mapt_data_t *mapt
++    ipc_map_data_t *map
+ )
+ {
+   RETURN_STATUS ret = STATUS_SUCCESS;
+@@ -455,21 +455,21 @@ ANSC_STATUS DhcpMgr_MaptParseOpt95Response
+   if( ret == STATUS_SUCCESS )
+   {
+      //Fill Required MAP-T information
+-     mapt->v6Len = g_stMaptData.RuleIPv6PrefixLen;
+-     mapt->isFMR = g_stMaptData.bFMR ? TRUE : FALSE;
+-     mapt->eaLen = g_stMaptData.EaLen;
+-     mapt->v4Len = g_stMaptData.RuleIPv4PrefixLen;
+-     mapt->psidOffset = g_stMaptData.PsidOffset;
+-     mapt->psidLen = g_stMaptData.PsidLen;
+-     mapt->psid = g_stMaptData.Psid;
+-     mapt->iapdPrefixLen = g_stMaptData.PdIPv6PrefixLen;
+-     mapt->ratio = g_stMaptData.Ratio;
+-
+-     snprintf (mapt->pdIPv6Prefix, BUFLEN_40, "%s", g_stMaptData.PdIPv6Prefix);
+-     snprintf (mapt->ruleIPv4Prefix, BUFLEN_40, "%s", g_stMaptData.RuleIPv4Prefix);
+-     snprintf (mapt->ruleIPv6Prefix, BUFLEN_40, "%s/%u", g_stMaptData.RuleIPv6Prefix
++     map->v6Len = g_stMaptData.RuleIPv6PrefixLen;
++     map->isFMR = g_stMaptData.bFMR ? TRUE : FALSE;
++     map->eaLen = g_stMaptData.EaLen;
++     map->v4Len = g_stMaptData.RuleIPv4PrefixLen;
++     map->psidOffset = g_stMaptData.PsidOffset;
++     map->psidLen = g_stMaptData.PsidLen;
++     map->psid = g_stMaptData.Psid;
++     map->iapdPrefixLen = g_stMaptData.PdIPv6PrefixLen;
++     map->ratio = g_stMaptData.Ratio;
++
++     snprintf (map->pdIPv6Prefix, BUFLEN_40, "%s", g_stMaptData.PdIPv6Prefix);
++     snprintf (map->ruleIPv4Prefix, BUFLEN_40, "%s", g_stMaptData.RuleIPv4Prefix);
++     snprintf (map->ruleIPv6Prefix, BUFLEN_40, "%s/%u", g_stMaptData.RuleIPv6Prefix
+                                                                       , g_stMaptData.RuleIPv6PrefixLen);
+-     snprintf (mapt->brIPv6Prefix,   BUFLEN_40, "%s/%u", g_stMaptData.BrIPv6Prefix
++     snprintf (map->brIPv6Prefix,   BUFLEN_40, "%s/%u", g_stMaptData.BrIPv6Prefix
+                                                                       , g_stMaptData.BrIPv6PrefixLen);
+      
+      MAPT_LOG_INFO("MAPT configuration complete.\n");
+diff --git a/source/DHCPMgrUtils/dhcpmgr_map_apis.h b/source/DHCPMgrUtils/dhcpmgr_map_apis.h
+index 8db4c07..64e32dd 100644
+--- a/source/DHCPMgrUtils/dhcpmgr_map_apis.h
++++ b/source/DHCPMgrUtils/dhcpmgr_map_apis.h
+@@ -213,6 +213,6 @@ ANSC_STATUS DhcpMgr_MaptParseOpt95Response
+     (
+         const PCHAR          pPdIPv6Prefix,
+         PUCHAR         pOptionBuf,
+-        ipc_mapt_data_t *mapt
++        ipc_map_data_t *map
+     );
+ #endif
+diff --git a/source/TR-181/middle_layer_src/dhcpmgr_rbus_apis.c b/source/TR-181/middle_layer_src/dhcpmgr_rbus_apis.c
+index b704d6f..cd0dcc8 100644
+--- a/source/TR-181/middle_layer_src/dhcpmgr_rbus_apis.c
++++ b/source/TR-181/middle_layer_src/dhcpmgr_rbus_apis.c
+@@ -195,7 +195,7 @@ static void DhcpMgr_UpdateDhcpv6MapInfo(PCOSA_DML_DHCPCV6_FULL pDhcpv6c, DHCP_MG
+         return;
+ 
+     PDML_DHCPCV6_MAP_INFO mapInfo = &pDhcpv6c->Info.MapInfo;
+-    ipc_mapt_data_t *mapt = &src->mapt;
++    ipc_map_data_t *mapt = &src->map;
+ 
+     mapInfo->MaptAssigned = src->maptAssigned ? TRUE : FALSE;
+     mapInfo->IsFMR = mapt->isFMR ? TRUE : FALSE;
+@@ -251,7 +251,7 @@ static void DhcpMgr_createDhcpv6LeaseInfoMsg(DHCPv6_PLUGIN_MSG *src, DHCP_MGR_IP
+         unsigned char  maptContainer[BUFLEN_256]; /* MAP-T option 95 in hex format*/
+         memset(maptContainer, 0, sizeof(maptContainer));
+         memcpy(maptContainer, src->mapt.Container, sizeof(src->mapt.Container));
+-        DhcpMgr_MaptParseOpt95Response(dest->sitePrefix, maptContainer, &dest->mapt);
++        DhcpMgr_MaptParseOpt95Response(dest->sitePrefix, maptContainer, &dest->map);
+         dest->maptAssigned = TRUE;
+     }
+ #endif // FEATURE_MAPT || FEATURE_SUPPORT_MAPT_NAT46
