@@ -47,8 +47,8 @@ DISTRO_FEATURES_remove = " lan0_as_wan"
 
 #Need to enable below distro once required changes are merged 
 #DISTRO_FEATURES_append = " EasyMesh"
-#DISTRO_FEATURES_append = " sta_manager"
 #DISTRO_FEATURES_append = " with_alsap"
+#DISTRO_FEATURES_append = " Em_Unittest"
 PREFERRED_VERSION_go = "1.24.%"
 
 #Enable wps support
@@ -62,10 +62,10 @@ DISTRO_FEATURES_append = " kernel6-6"
 
 DISTRO_FEATURES_append = " CONFIG_IEEE80211BE"
 
-#DISTRO_FEATURES_append = " generic_mlo"
+DISTRO_FEATURES_append = " generic_mlo"
 
 #Enable the below DISTRO to enable Hybrid Hal(rndis/modem) for cellular devices
 #DISTRO_FEATURES_append_broadband = " cellular_hybrid_support"
 
-#Disable rdm-agent for reference platform
-#DISTRO_FEATURES_append = "RDM"
+#Enable remote debugger
+DISTRO_FEATURES_append = " rrd"

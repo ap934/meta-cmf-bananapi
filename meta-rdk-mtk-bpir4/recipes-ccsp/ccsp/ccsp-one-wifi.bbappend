@@ -4,7 +4,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_remove = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/OneWifi;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=OneWifi"
 SRC_URI = "git://github.com/rdkcentral/OneWifi.git;protocol=https;branch=develop;name=OneWifi"
-SRCREV_OneWifi = "b32832f8062ae47535973379954d65193f4c3880"
+SRCREV_OneWifi = "782e594a4720d42662f88c529a5a44f744873160"
 DEPENDS_append = " mesh-agent "
 DEPENDS_remove = " opensync "
 DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' rdk-wifi-libhostap ', '', d)}"
@@ -15,12 +15,15 @@ CFLAGS_append_aarch64 = " -Wno-error "
 
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' --enable-em-app ', '', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' -DEASY_MESH_NODE ', '', d)}"
+CFLAGS_append = " -DFEATURE_SINGLE_PHY"
 
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'sta_manager', 'ONEWIFI_STA_MGR_APP_SUPPORT=true', 'ONEWIFI_STA_MGR_APP_SUPPORT=false', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'sta_manager', '-DONEWIFI_STA_MGR_APP_SUPPORT', '', d)}"
 
 EXTRA_OECONF_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' ONEWIFI_CAC_APP_SUPPORT=true ', '', d)}"
 CFLAGS_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'EasyMesh', ' -DONEWIFI_CAC_APP_SUPPORT -DONEWIFI_DB_SUPPORT  ', '', d)}"
+
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'generic_mlo', ' -DCONFIG_GENERIC_MLO ', '', d)}"
 
 EXTRA_OECONF_append = " ONEWIFI_CSI_APP_SUPPORT=true"
 EXTRA_OECONF_append = " ONEWIFI_MOTION_APP_SUPPORT=true"
@@ -36,15 +39,15 @@ SRC_URI += " \
     file://wifi_defaults.txt \
 "
 do_install_append(){
-    install -d ${D}/nvram 
     install -m 777 ${WORKDIR}/checkwifi.sh ${D}/usr/ccsp/wifi/
     install -m 777 ${WORKDIR}/onewifi_pre_*.sh ${D}/usr/ccsp/wifi/onewifi_pre_start.sh
-    install -m 644 ${WORKDIR}/wifi_defaults.txt ${D}/nvram/
+    install -m 644 ${WORKDIR}/wifi_defaults.txt ${D}/usr/ccsp/wifi/
 }
 
 FILES_${PN} += " \
     ${prefix}/ccsp/wifi/checkwifi.sh \
     ${prefix}/ccsp/wifi/onewifi_pre_start.sh \
     /usr/bin/wifi_events_consumer \
-    /nvram/wifi_defaults.txt \
+    /usr/ccsp/wifi/wifi_defaults.txt \
+    /usr/lib/libwifi* \
 "
