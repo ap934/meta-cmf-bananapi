@@ -13,6 +13,7 @@ SRC_URI_append = " \
     ${@bb.utils.contains('DISTRO_FEATURES','sdmmc','file://rdkb_cfg/sdmmc.cfg','',d)} \
     file://rdkb_cfg/wps_key.cfg \
     file://enable_sdcard_6_6.patch;apply=no \
+    file://bluetooth_6_6.patch;apply=no \
 "
 
 SRC_URI_append_mt7988 = "${@bb.utils.contains('DISTRO_FEATURES', 'cellular_hybrid_support', 'file://rdkb_cfg/rdkb-usb.cfg', '', d)}"
@@ -25,6 +26,7 @@ do_filogic_patches_append() {
     if [ ! -e patch_applied_6_6 ]; then
          if [ $Enable_sd_6_6 = 'true' ]; then
               patch -p1 < ${WORKDIR}/enable_sdcard_6_6.patch
+              patch -p1 < ${WORKDIR}/bluetooth_6_6.patch
          fi
          touch patch_applied_6_6
     fi
