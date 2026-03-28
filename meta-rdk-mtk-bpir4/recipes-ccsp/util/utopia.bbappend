@@ -4,6 +4,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://service_bridge_bpi.sh"
 
+CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'matter', ' -DFEATURE_MATTER_ENABLED', '', d)}"
+
 do_install_append() {
 
 install -d ${D}${sysconfdir}/
@@ -92,12 +94,16 @@ echo "#SelfHeal
 \$AutoReboot=true
 \$FW_LOG_FILE_PATH=/nvram/log/firewall
 \@FW_LOG_FILE_PATH_V2=/nvram/log/firewall" >> ${D}${sysconfdir}/utopia/system_defaults
+=======
+\$RemoteDebuggerEnabled=true
+\$AutoReboot=true" >> ${D}${sysconfdir}/utopia/system_defaults
 
 #Remote management
 sed -i 's/^\(\$mgmt_wan_httpsaccess=\)0/\11/' ${D}${sysconfdir}/utopia/system_defaults
 sed -i 's/^\(\$mgmt_wan_httpaccess=\)1/\10/' ${D}${sysconfdir}/utopia/system_defaults
 sed -i 's/^\(\$mgmt_wan_httpsport=\)443/\18181/' ${D}${sysconfdir}/utopia/system_defaults
 sed -i '/mgmt_wan_httpaccess/i \$mgmt_wan_httpaccess_ert=1' ${D}${sysconfdir}/utopia/system_defaults
+
 
 install -d ${D}${sysconfdir}/utopia/service.d/service_syslog
 install -m 755 ${S}/source/scripts/init/service.d/service_syslog/*.sh ${D}${sysconfdir}/utopia/service.d/service_syslog
@@ -113,6 +119,9 @@ ln -sf /usr/sbin/log_handle.sh ${D}/fss/gw/usr/sbin/log_handle.sh
 
 
 
+=======
+#Mounting nvram
+sed -i '/Before=CcspPandMSsp.service/a Requires=mount-nvram.service' ${D}/lib/systemd/system/ApplySystemDefaults.service
 }
 
 FILES_${PN} += " \
