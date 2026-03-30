@@ -1,33 +1,36 @@
-Index: platform/rdkb_hal/src/platform/platform_hal.c
-===================================================================
---- platform.orig/rdkb_hal/src/platform/platform_hal.c
-+++ platform/rdkb_hal/src/platform/platform_hal.c
-@@ -106,19 +106,21 @@ INT platform_hal_GetSerialNumber(CHAR* p
+diff -Naur platform.orig/rdkb_hal/src/platform/platform_hal.c platform/rdkb_hal/src/platform/platform_hal.c
+--- platform.orig/rdkb_hal/src/platform/platform_hal.c	2026-03-12 12:07:58.349484102 +0000
++++ platform/rdkb_hal/src/platform/platform_hal.c	2026-03-12 12:15:28.428644242 +0000
+@@ -48,6 +48,7 @@
+ 
+ INT platform_hal_PandMDBInit(void) { return RETURN_OK; }
+ INT platform_hal_DocsisParamsDBInit(void) { return RETURN_OK; }
++char *get_current_wan_ifname(void);
+ 
+ INT platform_hal_GetDeviceConfigStatus(CHAR *pValue)
+ {
+@@ -106,8 +107,19 @@
  	if (pValue != NULL)
  	{
  		INT arr[6] = {0};
 -		const char *path = "/sys/class/net/eth1/address";
-+		const char *path = "/etc/machine-id";
++		const char *path = "/sys/class/net/lan0/address";
++		char wan_path[128] = {0};
  		FILE *fp = fopen(path, "r");
++		if (fp == NULL)
++		{
++		       char *wan_ifname = get_current_wan_ifname();
++		       if (strcmp(wan_ifname, "0") != 0)
++		       {
++		               snprintf(wan_path, sizeof(wan_path), "/sys/class/net/%s/address", wan_ifname);
++		               path = wan_path;
++		               fp = fopen(path, "r");
++		       }
++		}
  		if (fp != NULL)
  		{
  			char *end;
- 			char buf[64] = {0};
- 			fgets(buf, sizeof(buf), fp);
-+			buf[strcspn(buf, "\n")] = '\0';
- 			fclose(fp);
--			if(6  == sscanf(buf, "%02x:%02x:%02x:%02x:%02x:%02x",&arr[0],&arr[1],&arr[2],&arr[3],&arr[4],&arr[5]))
-+			/*if(6  == sscanf(buf, "%02x:%02x:%02x:%02x:%02x:%02x",&arr[0],&arr[1],&arr[2],&arr[3],&arr[4],&arr[5]))
- 			{
- 				sprintf(pValue,"%02x%02x%02x%02x%02x%02x",arr[0],arr[1],arr[2],arr[3],arr[4],arr[5]);
- 				return RETURN_OK;
--			}	
-+			}*/
-+		       sprintf(pValue,"%s",buf);
- 		}
- 	}
- 	return RETURN_ERR;
-@@ -171,7 +173,7 @@ INT platform_hal_GetBaseMacAddress(CHAR
+@@ -171,7 +183,7 @@
  {
  	if (pValue != NULL)
  	{
