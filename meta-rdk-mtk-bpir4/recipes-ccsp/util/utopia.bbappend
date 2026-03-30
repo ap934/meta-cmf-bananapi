@@ -93,8 +93,7 @@ echo "#SelfHeal
 \$custom_data_model_file_name=/usr/ccsp/tr069pa/custom_mapper.xml 
 \$AutoReboot=true
 \$FW_LOG_FILE_PATH=/nvram/log/firewall
-\@FW_LOG_FILE_PATH_V2=/nvram/log/firewall" >> ${D}${sysconfdir}/utopia/system_defaults
-=======
+\@FW_LOG_FILE_PATH_V2=/nvram/log/firewall
 \$RemoteDebuggerEnabled=true
 \$AutoReboot=true" >> ${D}${sysconfdir}/utopia/system_defaults
 
