@@ -4,6 +4,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://service_bridge_bpi.sh"
 
+CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'matter', ' -DFEATURE_MATTER_ENABLED', '', d)}"
+
 do_install_append() {
 
 install -d ${D}${sysconfdir}/
@@ -88,6 +90,7 @@ echo "#SelfHeal
 #Custom Data Model
 \$custom_data_model_enabled=0
 \$custom_data_model_file_name=/usr/ccsp/tr069pa/custom_mapper.xml 
+\$RemoteDebuggerEnabled=true
 \$AutoReboot=true" >> ${D}${sysconfdir}/utopia/system_defaults
 
 #Remote management
@@ -96,6 +99,8 @@ sed -i 's/^\(\$mgmt_wan_httpaccess=\)1/\10/' ${D}${sysconfdir}/utopia/system_def
 sed -i 's/^\(\$mgmt_wan_httpsport=\)443/\18181/' ${D}${sysconfdir}/utopia/system_defaults
 sed -i '/mgmt_wan_httpaccess/i \$mgmt_wan_httpaccess_ert=1' ${D}${sysconfdir}/utopia/system_defaults
 
+#Mounting nvram
+sed -i '/Before=CcspPandMSsp.service/a Requires=mount-nvram.service' ${D}/lib/systemd/system/ApplySystemDefaults.service
 }
 
 FILES_${PN} += " \
