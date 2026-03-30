@@ -91,7 +91,6 @@ echo "#SelfHeal
 #Custom Data Model
 \$custom_data_model_enabled=0
 \$custom_data_model_file_name=/usr/ccsp/tr069pa/custom_mapper.xml 
-\$AutoReboot=true
 \$FW_LOG_FILE_PATH=/nvram/log/firewall
 \@FW_LOG_FILE_PATH_V2=/nvram/log/firewall
 \$RemoteDebuggerEnabled=true
@@ -117,8 +116,6 @@ ln -sf /usr/sbin/log_start.sh ${D}/fss/gw/usr/sbin/log_start.sh
 ln -sf /usr/sbin/log_handle.sh ${D}/fss/gw/usr/sbin/log_handle.sh
 
 
-
-=======
 #Mounting nvram
 sed -i '/Before=CcspPandMSsp.service/a Requires=mount-nvram.service' ${D}/lib/systemd/system/ApplySystemDefaults.service
 }
