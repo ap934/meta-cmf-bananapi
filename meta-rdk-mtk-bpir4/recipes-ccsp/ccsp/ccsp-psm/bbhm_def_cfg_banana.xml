@@ -1433,9 +1433,9 @@
   <Record name="dmsb.dhcpmanager.dhcpv6.ClientNoOfEntries" type="astr">1</Record>
 
   <Record name="dmsb.dhcpmanager.dhcpv6.Client.1.Alias" type="astr">WANOE</Record>
-  <Record name="dmsb.dhcpmanager.dhcpv6.Client.1.RequestedOptions" type="astr"> 23 , 24 </Record> <!-- domain, dns-server -->
+  <Record name="dmsb.dhcpmanager.dhcpv6.Client.1.RequestedOptions" type="astr"> 23 , 24 , 95 </Record> <!-- domain, dns-server -->
   <Record name="dmsb.dhcpmanager.dhcpv6.Client.1.ReqAddr" type="astr">TRUE</Record>
-  <Record name="dmsb.dhcpmanager.dhcpv6.Client.1.ReqPrefix" type="astr">FALSE</Record>
+  <Record name="dmsb.dhcpmanager.dhcpv6.Client.1.ReqPrefix" type="astr">TRUE</Record>
 
   <Record name="dmsb.dhcpmanager.dhcpv6.Client.1.SentOptNoOfEntries" type="astr">3</Record>
 

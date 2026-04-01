@@ -88,6 +88,9 @@ echo "#SelfHeal
 #TR069support
 \$EnableTR69Binary=true
 
+#Enablemaptconfig
+\@mapt_config_flag=set
+
 #Custom Data Model
 \$custom_data_model_enabled=0
 \$custom_data_model_file_name=/usr/ccsp/tr069pa/custom_mapper.xml 
