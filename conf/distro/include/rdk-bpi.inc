@@ -5,8 +5,6 @@ DISTRO_FEATURES_append = " WanManagerUnificationEnable"
 
 DISTRO_FEATURES_append = " rdkb_wan_manager"
 
-CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '-DFEATURE_RDKB_WAN_MANAGER', '', d)}"
-
 DISTRO_FEATURES_append = " halVersion3"
 
 #rdk-wifi-libhostap support for broadband
@@ -14,9 +12,6 @@ DISTRO_FEATURES_append = " HOSTAPD_2_11"
 
 # OneWifi feature
 DISTRO_FEATURES_append = " OneWifi onewifi_integration"
-
-# MacFilter Feature
-DISTRO_FEATURES_append = " disable_nl80211_acl"
 
 #No Moca Support
 DISTRO_FEATURES_append = " no_moca_support"
@@ -62,11 +57,19 @@ DISTRO_FEATURES_append = " kernel6-6"
 
 DISTRO_FEATURES_append = " CONFIG_IEEE80211BE"
 
+DISTRO_FEATURES_append = " matter"
+PREFERRED_VERSION_barton-matter = "1.4.2"
+
 DISTRO_FEATURES_append = " generic_mlo"
 
 #Enable the below DISTRO to enable Hybrid Hal(rndis/modem) for cellular devices
 #DISTRO_FEATURES_append_broadband = " cellular_hybrid_support"
 
+#Disable rdm-agent for reference platform
+#DISTRO_FEATURES_append = "RDM"
+
+DISTRO_FEATURES_append = " dhcp_manager "
+DISTRO_FEATURES_append = " rdkb_configurable_wan_interface"
 #Enable remote debugger
 DISTRO_FEATURES_append = " rrd"
 

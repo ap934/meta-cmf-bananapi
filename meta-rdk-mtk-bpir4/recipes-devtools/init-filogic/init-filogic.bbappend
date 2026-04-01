@@ -6,6 +6,7 @@ do_install_append(){
        sed -i '/brctl addif brlan0 lan0/d' ${D}${sbindir}/init-bridge.sh
    fi
 sed -i '/model/a \
+while [ `mount | grep nvram | wc -l` -eq 0 ]; do usleep 500000 ; done; \
 if [ ! -d /nvram/secure ]; then \
     mkdir -p /nvram/secure \
 fi \
@@ -22,6 +23,10 @@ if [ $? -eq 0 ];then \
    BRLAN_MAC=`cat /nvram/mac_addresses.txt | grep -a brlan0 | cut -d " " -f 2` \
    ifconfig brlan0 hw ether $BRLAN_MAC \
 fi' ${D}${sbindir}/init-bridge.sh
+
+#Mounting nvram
+   sed -i '/Before=CcspPandMSsp.service/a Requires=mount-nvram.service' ${D}/lib/systemd/system/init-Lanbridge.service
+   sed -i 's/utopia.service/mount-nvram.service &/' ${D}/lib/systemd/system/init-Lanbridge.service
 }
 
 #ESDK support - Avoid conflict file is installed by both systemd and init-filogic in kirkstone
