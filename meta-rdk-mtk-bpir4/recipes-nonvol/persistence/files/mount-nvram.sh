@@ -39,7 +39,9 @@ mkdir -p /nvram/secure
 mkdir -p /opt/secure
 mount --bind /nvram /opt/secure
 # MariaDB stored under /var/lib/mysql
+if [ -f /lib/systemd/system/mysqld.service ] ; then
 mkdir -p /var/lib/mysql
 mount --bind /nvram /var/lib/mysql
+fi
 
 exit 0
