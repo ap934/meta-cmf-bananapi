@@ -72,3 +72,7 @@ DISTRO_FEATURES_append = " dhcp_manager "
 DISTRO_FEATURES_append = " rdkb_configurable_wan_interface"
 #Enable remote debugger
 DISTRO_FEATURES_append = " rrd"
+
+#Enable MAP-T
+DISTRO_FEATURES_append = " feature_mapt"
+DISTRO_FEATURES_append = " nat46"
